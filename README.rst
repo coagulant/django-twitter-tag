@@ -1,5 +1,7 @@
-==================
 Django Twitter Tag
 ==================
 
-Shows last N tweets of a user in django template
+Shows last N tweets of a user in django template.
+
+More docs coming soon...
+
