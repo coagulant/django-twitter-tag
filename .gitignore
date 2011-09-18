@@ -1,0 +1,12 @@
+/build
+/dist
+/*.egg-info
+*.pyc
+*.log
+*.egg
+*.db
+*.pid
+pip-log.txt
+.DS_Store
+/docs/html
+/docs/doctrees
