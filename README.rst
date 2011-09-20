@@ -31,7 +31,7 @@ Usage
 
 * Load tag in your template like this::
 
-    {% load twitter_tags %}
+    {% load twitter_tag %}
 
 
 * Get user's (futurecolors in example) most recent tweets and store them in ``tweets`` variable::
