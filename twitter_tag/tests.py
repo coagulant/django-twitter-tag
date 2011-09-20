@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from django.conf import settings
 from django.template import Template, Context
 from django.template.base import TemplateSyntaxError
 from django.test import TestCase
@@ -52,7 +53,7 @@ class TwitterTagTestCase(TestCase):
 
     def test_twitter_tag_simple_mock(self):
         context = Context()
-        template = Template( """{% load twitter_tags %}{% get_tweets_new for "jresig" as tweets %}""")
+        template = Template("""{% load twitter_tags %}{% get_tweets_new for "jresig" as tweets %}""")
         template.render(context)
         self.api.GetUserTimeline.assert_called_with(screen_name='jresig', include_rts=True, include_entities=True)
 
@@ -63,7 +64,7 @@ class TwitterTagTestCase(TestCase):
     
     def test_twitter_tag_limit(self):
         context = Context()
-        template = Template( """{% load twitter_tags %}{% get_tweets_new for "futurecolors" as tweets limit 2 %}""")
+        template = Template("""{% load twitter_tags %}{% get_tweets_new for "futurecolors" as tweets limit 2 %}""")
         template.render(context)
         self.api.GetUserTimeline.assert_called_with(screen_name='futurecolors', include_rts=True, include_entities=True)
 
@@ -72,7 +73,7 @@ class TwitterTagTestCase(TestCase):
 
     def test_twitter_tag_with_no_replies(self):
         context = Context()
-        template = Template( """{% load twitter_tags %}{% get_tweets_new for "futurecolors" as tweets exclude "replies" limit 10 %}""")
+        template = Template("""{% load twitter_tags %}{% get_tweets_new for "futurecolors" as tweets exclude "replies" limit 10 %}""")
         template.render(context)
         self.api.GetUserTimeline.assert_called_with(screen_name='futurecolors', include_rts=True, include_entities=True)
 
@@ -82,17 +83,38 @@ class TwitterTagTestCase(TestCase):
 
     def test_twitter_tag_with_no_retweets(self):
         context = Context()
-        template = Template( """{% load twitter_tags %}{% get_tweets_new for "futurecolors" as tweets exclude "retweets" %}""")
+        template = Template("""{% load twitter_tags %}{% get_tweets_new for "futurecolors" as tweets exclude "retweets" %}""")
         template.render(context)
         self.api.GetUserTimeline.assert_called_with(screen_name='futurecolors', include_rts=False, include_entities=True)
 
 
     def test_twitter_tag_with_no_replies_no_retweets(self):
         context = Context()
-        template = Template( """{% load twitter_tags %}{% get_tweets_new for "futurecolors" as tweets exclude "retweets,replies" %}""")
+        template = Template("""{% load twitter_tags %}{% get_tweets_new for "futurecolors" as tweets exclude "retweets,replies" %}""")
         template.render(context)
         self.api.GetUserTimeline.assert_called_with(screen_name='futurecolors', include_rts=False, include_entities=True)
+
 
     def test_bad_syntax(self):
         self.assertRaises(TemplateSyntaxError, Template, """{% load twitter_tags %}{% get_tweets_new %}""")
         self.assertRaises(TemplateSyntaxError, Template, """{% load twitter_tags %}{% get_tweets_new as "tweets" %}""")
+
+
+    @patch.object(settings, 'DEBUG', True)
+    def test_exception_in_debug_mode(self):
+        self.api.GetUserTimeline.side_effect = twitter.TwitterError
+
+        context = Context()
+        template = Template("""{% load twitter_tags %}{% get_tweets_new for "twitter" as tweets %}""")
+        self.assertRaises(twitter.TwitterError, template.render, context)
+
+
+    @patch.object(settings, 'DEBUG', False)
+    def test_no_exception_in_production(self):
+        self.api.GetUserTimeline.side_effect = twitter.TwitterError
+
+        context = Context()
+        template = Template("""{% load twitter_tags %}{% get_tweets_new for "twitter" as tweets %}""")
+        output = template.render(context)
+        self.assertEqual(output, '')
+        self.assertEqual(context['tweets'], [])

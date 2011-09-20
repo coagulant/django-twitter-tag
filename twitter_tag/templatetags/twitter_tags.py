@@ -1,4 +1,5 @@
 from django import template
+from django.conf import settings
 from templatetag_sugar.parser import Optional, Constant, Name, Variable
 from templatetag_sugar.register import tag
 import ttp
@@ -16,7 +17,15 @@ def get_tweets_new(context, username, asvar, exclude='', limit=None):
     p = ttp.Parser()
     tweets = []
     include_rts = 'retweets' not in exclude
-    user_last_tweets = twitter.Api().GetUserTimeline(screen_name=username, include_rts=include_rts, include_entities=True)
+    try:
+        user_last_tweets = twitter.Api().GetUserTimeline(screen_name=username,
+                                                         include_rts=include_rts,
+                                                         include_entities=True)
+    except twitter.TwitterError:
+        if settings.DEBUG:
+            raise
+        context[asvar] = []
+        return ""
 
     for status in user_last_tweets:
         if 'replies' in exclude and status.GetInReplyToUserId() is not None:
