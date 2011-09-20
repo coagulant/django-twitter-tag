@@ -36,7 +36,7 @@ Usage
 
 * Get user's (futurecolors in example) most recent tweets and store them in ``tweets`` variable::
 
-    {% get_tweets_new for "futurecolors" as tweets %}
+    {% get_tweets for "futurecolors" as tweets %}
 
 
 * Now you have a list of tweets in your template context, which you can iterate over like this::
@@ -53,17 +53,17 @@ Examples
 
 You can specify number of tweets to get::
 
-    {% get_tweets_new for "futurecolors" as tweets exclude "replies" limit 10 %}
+    {% get_tweets for "futurecolors" as tweets exclude "replies" limit 10 %}
 
 
 To filter out tweet replies (that start with @ char)::
 
-    {% get_tweets_new for "futurecolors" as tweets exclude "replies" limit 10 %}
+    {% get_tweets for "futurecolors" as tweets exclude "replies" limit 10 %}
 
 
 To ignore native retweets::
 
-    {% get_tweets_new for "futurecolors" as tweets exclude "retweets" %}
+    {% get_tweets for "futurecolors" as tweets exclude "retweets" %}
     
 
 Extra
@@ -72,7 +72,7 @@ Extra
 Tweet's properties
 ~~~~~~~~~~~~~~~~~~
 
-get_tweets_new holds a list of ``Status`` objects, which represet single user tweet.
+get_tweets holds a list of ``Status`` objects, which represet single user tweet.
 According to python-twitter_ API, every status has following attributes, availiable in templates::
 
   status.created_at

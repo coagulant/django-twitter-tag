@@ -12,7 +12,7 @@ register = template.Library()
 @tag(register, [Constant("for"), Variable(), Constant("as"), Name(),
                 Optional([Constant("exclude"), Variable("exclude")]),
                 Optional([Constant("limit"), Variable("limit")])])
-def get_tweets_new(context, username, asvar, exclude='', limit=None):
+def get_tweets(context, username, asvar, exclude='', limit=None):
 
     p = ttp.Parser()
     tweets = []
