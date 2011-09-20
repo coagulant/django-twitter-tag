@@ -66,6 +66,9 @@ To ignore native retweets::
     {% get_tweets_new for "futurecolors" as tweets exclude "retweets" %}
     
 
+Extra
+-----
+
 Tweet's properties
 ~~~~~~~~~~~~~~~~~~
 
@@ -95,3 +98,10 @@ Tweet's html
 
 Tweet also has extra ``status.html`` property, which contains tweet, formatted for html output
 with all needed links.
+
+
+Exception handling
+~~~~~~~~~~~~~~~~~~
+
+If ``DEBUG==True`` any Twitter API exceptions like 'Over capacity' are raised and propagated,
+otherwise the're silenced.
