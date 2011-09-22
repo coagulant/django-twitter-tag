@@ -14,9 +14,9 @@ Just use tweet's ``html`` attrubute (see example below).
 Installation
 ------------
 
-For now it's recommended to install via pip::
+Recommended way to install is pip::
 
-  pip install -e git+https://github.com/futurecolors/django-twitter-tag#egg=twitter_tag
+  pip install django-twitter-tag
 
 
 Usage
