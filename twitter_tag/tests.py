@@ -11,8 +11,8 @@ import twitter
 class StubGenerator(object):
     TWEET_STUBS = {'jresig': [{'text': "This is not John Resig - you should be following @jeresig instead!",
                                'html': "This is not John Resig - you should be following <a href=\"http://twitter.com/jeresig\">@jeresig</a> instead!"}],
-                   'futurecolors': [{'text': u"JetBrains радуют новыми фичами и апдейтами старых. Пост из блога #pycharm про дебаг шаблонов джанги в их IDE http://ht.ly/6viu3",},
-                                    {'text': u"На новых проектах будем использовать django-jenkins и django-any http://t.co/FjhHpdwV http://t.co/Hig8Hsjg Очень полезные штуки.",},
+                   'futurecolors': [{'text': u"JetBrains радуют новыми фичами и апдейтами старых. Пост из блога #pycharm про дебаг шаблонов джанги в их IDE http://ht.ly/6viu3"},
+                                    {'text': u"На новых проектах будем использовать django-jenkins и django-any http://t.co/FjhHpdwV http://t.co/Hig8Hsjg Очень полезные штуки."},
                                     {'text': u"@goshakkk Переход на руби был связан именно с отсутствием поддержки py3k? :)",
                                      'in_reply_to_user_id': 61236914},
                                     {'text': u"Наконец-то начались какие-то попытки портировать #Django на #python3 http://t.co/XkftDsQH",
@@ -50,14 +50,12 @@ class TwitterTagTestCase(TestCase):
         mock = patcher.start()
         self.api = mock.return_value
         self.api.GetUserTimeline.side_effect = StubGenerator.get_timeline
-
         
     def render_template(self, template):
         context = Context()
         template = Template(template)
         output = template.render(context)
         return output, context
-
 
     def test_twitter_tag_simple_mock(self):
         output, context = self.render_template(template="""{% load twitter_tag %}{% get_tweets for "jresig" as tweets %}""")
@@ -72,14 +70,12 @@ class TwitterTagTestCase(TestCase):
                           'This is not John Resig - you should be following <a href="http://twitter.com/jeresig">@jeresig</a> instead!',
                           'corresponding html for templates')
 
-
     def test_twitter_tag_limit(self):
         output, context = self.render_template(
             template="""{% load twitter_tag %}{% get_tweets for "futurecolors" as tweets limit 2 %}""")
 
         self.api.GetUserTimeline.assert_called_with(screen_name='futurecolors', include_rts=True, include_entities=True)
         self.assertEquals(len(context['tweets']), 2, 'Context should have 2 tweets')
-
 
     def test_twitter_tag_with_no_replies(self):
         output, context = self.render_template(
@@ -93,14 +89,12 @@ class TwitterTagTestCase(TestCase):
             if 'in_reply_to_user_id' not in stub:
                 self.assertEquals(tweets_context.popleft().text, stub['text'])
 
-
     def test_twitter_tag_with_no_retweets(self):
         output, context = self.render_template(
             template="""{% load twitter_tag %}{% get_tweets for "futurecolors" as tweets exclude "retweets" %}""")
 
         self.api.GetUserTimeline.assert_called_with(screen_name='futurecolors', include_rts=False, include_entities=True)
         self.assertEquals(len(context['tweets']), 3, 'Stub contains 4 tweets, including 1 retweet')
-
 
     def test_twitter_tag_with_no_replies_no_retweets(self):
         output, context = self.render_template(
@@ -109,11 +103,9 @@ class TwitterTagTestCase(TestCase):
         self.api.GetUserTimeline.assert_called_with(screen_name='futurecolors', include_rts=False, include_entities=True)
         self.assertEquals(len(context['tweets']), 2, 'Stub contains 4 tweets, including 1 reply & 1 retweet')
 
-
     def test_bad_syntax(self):
         self.assertRaises(TemplateSyntaxError, Template, """{% load twitter_tag %}{% get_tweets %}""")
         self.assertRaises(TemplateSyntaxError, Template, """{% load twitter_tag %}{% get_tweets as "tweets" %}""")
-
 
     @patch.object(settings, 'DEBUG', True)
     def test_exception_in_debug_mode(self):
@@ -121,7 +113,6 @@ class TwitterTagTestCase(TestCase):
         
         template = Template("""{% load twitter_tag %}{% get_tweets for "twitter" as tweets %}""")
         self.assertRaises(twitter.TwitterError, template.render, Context())
-
 
     @patch.object(settings, 'DEBUG', False)
     def test_no_exception_in_production(self):
