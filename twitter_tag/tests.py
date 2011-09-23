@@ -41,7 +41,7 @@ class StubGenerator(object):
     def get_status(cls, **kwargs):
         return twitter.Status(**kwargs)
 
-    
+
 class TwitterTagTestCase(TestCase):
 
     def setUp(self):
@@ -50,7 +50,7 @@ class TwitterTagTestCase(TestCase):
         mock = patcher.start()
         self.api = mock.return_value
         self.api.GetUserTimeline.side_effect = StubGenerator.get_timeline
-        
+
     def render_template(self, template):
         context = Context()
         template = Template(template)
@@ -110,7 +110,7 @@ class TwitterTagTestCase(TestCase):
     @patch.object(settings, 'DEBUG', True)
     def test_exception_in_debug_mode(self):
         self.api.GetUserTimeline.side_effect = twitter.TwitterError
-        
+
         template = Template("""{% load twitter_tag %}{% get_tweets for "twitter" as tweets %}""")
         self.assertRaises(twitter.TwitterError, template.render, Context())
 
