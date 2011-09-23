@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import collections
 from django.conf import settings
 from django.template import Template, Context
 from django.template.base import TemplateSyntaxError
@@ -50,49 +51,63 @@ class TwitterTagTestCase(TestCase):
         self.api = mock.return_value
         self.api.GetUserTimeline.side_effect = StubGenerator.get_timeline
 
+        
+    def render_template(self, template):
+        context = Context()
+        template = Template(template)
+        output = template.render(context)
+        return output, context
+
 
     def test_twitter_tag_simple_mock(self):
-        context = Context()
-        template = Template("""{% load twitter_tag %}{% get_tweets for "jresig" as tweets %}""")
-        template.render(context)
+        output, context = self.render_template(template="""{% load twitter_tag %}{% get_tweets for "jresig" as tweets %}""")
+
         self.api.GetUserTimeline.assert_called_with(screen_name='jresig', include_rts=True, include_entities=True)
+        self.assertEquals(len(context['tweets']), 1, 'jresig account has only one tweet')
+        self.assertEquals(output, '')
+        self.assertEquals(context['tweets'][0].text,
+                          'This is not John Resig - you should be following @jeresig instead!',
+                          'one and only tweet text')
+        self.assertEquals(context['tweets'][0].html,
+                          'This is not John Resig - you should be following <a href="http://twitter.com/jeresig">@jeresig</a> instead!',
+                          'corresponding html for templates')
 
-        self.assertEquals(len(context['tweets']), 1)
-        self.assertEquals(context['tweets'][0].text, 'This is not John Resig - you should be following @jeresig instead!')
-        self.assertEquals(context['tweets'][0].html, 'This is not John Resig - you should be following <a href="http://twitter.com/jeresig">@jeresig</a> instead!')
 
-    
     def test_twitter_tag_limit(self):
-        context = Context()
-        template = Template("""{% load twitter_tag %}{% get_tweets for "futurecolors" as tweets limit 2 %}""")
-        template.render(context)
-        self.api.GetUserTimeline.assert_called_with(screen_name='futurecolors', include_rts=True, include_entities=True)
+        output, context = self.render_template(
+            template="""{% load twitter_tag %}{% get_tweets for "futurecolors" as tweets limit 2 %}""")
 
-        self.assertEquals(len(context['tweets']), 2)
+        self.api.GetUserTimeline.assert_called_with(screen_name='futurecolors', include_rts=True, include_entities=True)
+        self.assertEquals(len(context['tweets']), 2, 'Context should have 2 tweets')
 
 
     def test_twitter_tag_with_no_replies(self):
-        context = Context()
-        template = Template("""{% load twitter_tag %}{% get_tweets for "futurecolors" as tweets exclude "replies" limit 10 %}""")
-        template.render(context)
-        self.api.GetUserTimeline.assert_called_with(screen_name='futurecolors', include_rts=True, include_entities=True)
+        output, context = self.render_template(
+            template="""{% load twitter_tag %}{% get_tweets for "futurecolors" as tweets exclude "replies" limit 10 %}""")
 
-        self.assertEquals(len(context['tweets']), 3)
-        self.assertEquals(context['tweets'][2].text, StubGenerator.TWEET_STUBS['futurecolors'][3]['text'])
+        self.api.GetUserTimeline.assert_called_with(screen_name='futurecolors', include_rts=True, include_entities=True)
+        self.assertEquals(len(context['tweets']), 3, 'Stub contains 4 tweets, including 1 reply')
+
+        tweets_context = collections.deque(context['tweets'])
+        for stub in StubGenerator.TWEET_STUBS['futurecolors']:
+            if 'in_reply_to_user_id' not in stub:
+                self.assertEquals(tweets_context.popleft().text, stub['text'])
 
 
     def test_twitter_tag_with_no_retweets(self):
-        context = Context()
-        template = Template("""{% load twitter_tag %}{% get_tweets for "futurecolors" as tweets exclude "retweets" %}""")
-        template.render(context)
+        output, context = self.render_template(
+            template="""{% load twitter_tag %}{% get_tweets for "futurecolors" as tweets exclude "retweets" %}""")
+
         self.api.GetUserTimeline.assert_called_with(screen_name='futurecolors', include_rts=False, include_entities=True)
+        self.assertEquals(len(context['tweets']), 3, 'Stub contains 4 tweets, including 1 retweet')
 
 
     def test_twitter_tag_with_no_replies_no_retweets(self):
-        context = Context()
-        template = Template("""{% load twitter_tag %}{% get_tweets for "futurecolors" as tweets exclude "retweets,replies" %}""")
-        template.render(context)
+        output, context = self.render_template(
+            template="""{% load twitter_tag %}{% get_tweets for "futurecolors" as tweets exclude "retweets,replies" %}""")
+
         self.api.GetUserTimeline.assert_called_with(screen_name='futurecolors', include_rts=False, include_entities=True)
+        self.assertEquals(len(context['tweets']), 2, 'Stub contains 4 tweets, including 1 reply & 1 retweet')
 
 
     def test_bad_syntax(self):
@@ -103,18 +118,16 @@ class TwitterTagTestCase(TestCase):
     @patch.object(settings, 'DEBUG', True)
     def test_exception_in_debug_mode(self):
         self.api.GetUserTimeline.side_effect = twitter.TwitterError
-
-        context = Context()
+        
         template = Template("""{% load twitter_tag %}{% get_tweets for "twitter" as tweets %}""")
-        self.assertRaises(twitter.TwitterError, template.render, context)
+        self.assertRaises(twitter.TwitterError, template.render, Context())
 
 
     @patch.object(settings, 'DEBUG', False)
     def test_no_exception_in_production(self):
         self.api.GetUserTimeline.side_effect = twitter.TwitterError
 
-        context = Context()
-        template = Template("""{% load twitter_tag %}{% get_tweets for "twitter" as tweets %}""")
-        output = template.render(context)
+        output, context = self.render_template(
+            template="""{% load twitter_tag %}{% get_tweets for "twitter" as tweets %}""")
         self.assertEqual(output, '')
         self.assertEqual(context['tweets'], [])

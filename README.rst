@@ -43,7 +43,7 @@ Usage
 
     <ul>
     {% for tweet in tweets %}
-        <li>{{ tweet.html }}</li>
+        <li>{{ tweet.html|safe }}</li>
     {% endfor %}
     </ul>
 
