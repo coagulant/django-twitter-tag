@@ -7,7 +7,8 @@ except ImportError:
 
 tests_require = [
     'Django>=1.2,<1.4',
-    'mock==0.7.2'
+    'mock==0.7.2',
+    'django-jenkins>=0.11.1'
 ]
 
 setup(
