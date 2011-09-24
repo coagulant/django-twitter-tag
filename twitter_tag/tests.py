@@ -70,6 +70,17 @@ class TwitterTagTestCase(TestCase):
                           'This is not John Resig - you should be following <a href="http://twitter.com/jeresig">@jeresig</a> instead!',
                           'corresponding html for templates')
 
+    def test_several_twitter_tags_on_page(self):
+        output, context = self.render_template(template="""{% load twitter_tag %}
+                                                           {% get_tweets for "jresig" as tweets %}
+                                                           {% get_tweets for "futurecolors" as more_tweets %}""")
+        self.assertEqual(output.strip(), '')
+        self.assertEquals(len(context['tweets']), 1, 'jresig account has only one tweet')
+        self.assertEqual(context['tweets'][0].text, StubGenerator.TWEET_STUBS['jresig'][0]['text'])
+
+        self.assertEquals(len(context['more_tweets']), 4, 'futurecolors have 4 tweets')
+        self.assertEqual(context['more_tweets'][0].text, StubGenerator.TWEET_STUBS['futurecolors'][0]['text'])
+        
     def test_twitter_tag_limit(self):
         output, context = self.render_template(
             template="""{% load twitter_tag %}{% get_tweets for "futurecolors" as tweets limit 2 %}""")

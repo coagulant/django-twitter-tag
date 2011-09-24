@@ -7,14 +7,13 @@ import twitter
 
 
 register = template.Library()
-
+tweet_parser = ttp.Parser()
 
 @tag(register, [Constant("for"), Variable(), Constant("as"), Name(),
                 Optional([Constant("exclude"), Variable("exclude")]),
                 Optional([Constant("limit"), Variable("limit")])])
 def get_tweets(context, username, asvar, exclude='', limit=None):
 
-    p = ttp.Parser()
     tweets = []
     include_rts = 'retweets' not in exclude
     try:
@@ -31,7 +30,7 @@ def get_tweets(context, username, asvar, exclude='', limit=None):
         if 'replies' in exclude and status.GetInReplyToUserId() is not None:
             continue
 
-        status.html = p.parse(status.GetText()).html
+        status.html = tweet_parser.parse(status.GetText()).html
         tweets.append(status)
 
     if limit:
