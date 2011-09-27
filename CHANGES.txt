@@ -1,6 +1,6 @@
 0.3
 
-* TODO
+* Added runtests.py
 
 0.2.1
 
