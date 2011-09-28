@@ -1,11 +1,13 @@
 # -*- coding: utf-8 -*-
 import collections
 from django.conf import settings
+from django.core.cache import cache
 from django.template import Template, Context
 from django.template.base import TemplateSyntaxError
 from django.test import TestCase
 from mock import patch
 import twitter
+from twitter_tag.templatetags.twitter_tag import get_cache_key
 
 
 class StubGenerator(object):
@@ -27,8 +29,9 @@ class StubGenerator(object):
         for stub in cls.TWEET_STUBS[screen_name]:
             if not include_rts and stub.get('retweeted', False):
                 continue
-            html = stub.pop('html', '')
-            tweet = cls.get_status(user=user, **stub)
+            data = stub.copy()
+            html = data.pop('html', '')
+            tweet = cls.get_status(user=user, **data)
             tweet.html = html
             tweets.append(tweet)
         return tweets
@@ -45,6 +48,7 @@ class StubGenerator(object):
 class TwitterTagTestCase(TestCase):
 
     def setUp(self):
+
         patcher = patch('twitter.Api')
         self.addCleanup(patcher.stop)
         mock = patcher.start()
@@ -58,17 +62,14 @@ class TwitterTagTestCase(TestCase):
         return output, context
 
     def test_twitter_tag_simple_mock(self):
+
         output, context = self.render_template(template="""{% load twitter_tag %}{% get_tweets for "jresig" as tweets %}""")
 
         self.api.GetUserTimeline.assert_called_with(screen_name='jresig', include_rts=True, include_entities=True)
         self.assertEquals(len(context['tweets']), 1, 'jresig account has only one tweet')
         self.assertEquals(output, '')
-        self.assertEquals(context['tweets'][0].text,
-                          'This is not John Resig - you should be following @jeresig instead!',
-                          'one and only tweet text')
-        self.assertEquals(context['tweets'][0].html,
-                          'This is not John Resig - you should be following <a href="http://twitter.com/jeresig">@jeresig</a> instead!',
-                          'corresponding html for templates')
+        self.assertEquals(context['tweets'][0].text, StubGenerator.TWEET_STUBS['jresig'][0]['text'], 'one and only tweet text')
+        self.assertEquals(context['tweets'][0].html, StubGenerator.TWEET_STUBS['jresig'][0]['html'], 'corresponding html for templates')
 
     def test_several_twitter_tags_on_page(self):
         output, context = self.render_template(template="""{% load twitter_tag %}
@@ -80,7 +81,7 @@ class TwitterTagTestCase(TestCase):
 
         self.assertEquals(len(context['more_tweets']), 4, 'futurecolors have 4 tweets')
         self.assertEqual(context['more_tweets'][0].text, StubGenerator.TWEET_STUBS['futurecolors'][0]['text'])
-        
+
     def test_twitter_tag_limit(self):
         output, context = self.render_template(
             template="""{% load twitter_tag %}{% get_tweets for "futurecolors" as tweets limit 2 %}""")
@@ -133,3 +134,19 @@ class TwitterTagTestCase(TestCase):
             template="""{% load twitter_tag %}{% get_tweets for "twitter" as tweets %}""")
         self.assertEqual(output, '')
         self.assertEqual(context['tweets'], [])
+
+    @patch.object(settings, 'DEBUG', False)
+    def test_get_from_cache_when_twitter_api_fails(self):
+        # it should be ok by now
+        self.render_template(
+            template="""{% load twitter_tag %}{% get_tweets for "jresig" as tweets %}""")
+        cache_key = get_cache_key('jresig', 'tweets')
+        self.assertEqual(len(cache.get(cache_key)), len(StubGenerator.TWEET_STUBS['jresig']))
+        self.assertEqual(cache.get(cache_key)[0].text, StubGenerator.TWEET_STUBS['jresig'][0]['text'])
+
+        # when twitter api fails, should use cache
+        self.api.GetUserTimeline.side_effect = twitter.TwitterError
+        output, context = self.render_template(
+            template="""{% load twitter_tag %}{% get_tweets for "jresig" as tweets %}""")
+        self.assertEquals(len(context['tweets']), 1, 'jresig account has only one tweet')
+        self.assertEqual(context['tweets'][0].text, StubGenerator.TWEET_STUBS['jresig'][0]['text'])
