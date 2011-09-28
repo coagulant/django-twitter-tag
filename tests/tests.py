@@ -8,7 +8,7 @@ from django.test import TestCase
 from mock import patch
 import twitter
 from twitter_tag.templatetags.twitter_tag import get_cache_key
-
+from testfixtures import log_capture
 
 class StubGenerator(object):
     TWEET_STUBS = {'jresig': [{'text': "This is not John Resig - you should be following @jeresig instead!",
@@ -119,24 +119,29 @@ class TwitterTagTestCase(TestCase):
         self.assertRaises(TemplateSyntaxError, Template, """{% load twitter_tag %}{% get_tweets %}""")
         self.assertRaises(TemplateSyntaxError, Template, """{% load twitter_tag %}{% get_tweets as "tweets" %}""")
 
-    @patch.object(settings, 'DEBUG', True)
-    def test_exception_in_debug_mode(self):
-        self.api.GetUserTimeline.side_effect = twitter.TwitterError
+    @log_capture()
+    def test_exception_is_propagated_but_logged(self, logger_messages):
+        exception_message = "Capacity Error"
+        logger_name = 'twitter_tag.templatetags.twitter_tag'
+        self.api.GetUserTimeline.side_effect = twitter.TwitterError(exception_message)
 
-        template = Template("""{% load twitter_tag %}{% get_tweets for "twitter" as tweets %}""")
-        self.assertRaises(twitter.TwitterError, template.render, Context())
+        with patch.object(settings, 'DEBUG', True):
+            output, context = self.render_template(
+                template="""{% load twitter_tag %}{% get_tweets for "twitter" as tweets %}""")
+            self.assertEqual(output, '')
+            self.assertEqual(context['tweets'], [])
+
+        with patch.object(settings, 'DEBUG', False):
+            output, context = self.render_template(
+                template="""{% load twitter_tag %}{% get_tweets for "twitter" as tweets %}""")
+            self.assertEqual(output, '')
+            self.assertEqual(context['tweets'], [])
+            logger_messages.check((logger_name, 'ERROR', exception_message), (logger_name, 'ERROR', exception_message))
 
     @patch.object(settings, 'DEBUG', False)
-    def test_no_exception_in_production(self):
-        self.api.GetUserTimeline.side_effect = twitter.TwitterError
-
-        output, context = self.render_template(
-            template="""{% load twitter_tag %}{% get_tweets for "twitter" as tweets %}""")
-        self.assertEqual(output, '')
-        self.assertEqual(context['tweets'], [])
-
-    @patch.object(settings, 'DEBUG', False)
-    def test_get_from_cache_when_twitter_api_fails(self):
+    @log_capture()
+    def test_get_from_cache_when_twitter_api_fails(self, logger_messages):
+        logger_name = 'twitter_tag.templatetags.twitter_tag'
         # it should be ok by now
         self.render_template(
             template="""{% load twitter_tag %}{% get_tweets for "jresig" as tweets %}""")
@@ -145,8 +150,9 @@ class TwitterTagTestCase(TestCase):
         self.assertEqual(cache.get(cache_key)[0].text, StubGenerator.TWEET_STUBS['jresig'][0]['text'])
 
         # when twitter api fails, should use cache
-        self.api.GetUserTimeline.side_effect = twitter.TwitterError
+        self.api.GetUserTimeline.side_effect = twitter.TwitterError('Technical Error')
         output, context = self.render_template(
             template="""{% load twitter_tag %}{% get_tweets for "jresig" as tweets %}""")
         self.assertEquals(len(context['tweets']), 1, 'jresig account has only one tweet')
         self.assertEqual(context['tweets'][0].text, StubGenerator.TWEET_STUBS['jresig'][0]['text'])
+        logger_messages.check((logger_name, 'ERROR', 'Technical Error'))
