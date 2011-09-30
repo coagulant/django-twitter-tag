@@ -66,6 +66,19 @@ To ignore native retweets::
     {% get_tweets for "futurecolors" as tweets exclude "retweets" %}
     
 
+Caching
+-------
+
+It's strongly advised to use template caching framework to reduce the amount of twitter API calls
+and avoid reaching possible request limit::
+
+    {% load twitter_tag cache %}
+    {% cache 3600 my_tweets %}
+    {% get_tweets for "futurecolors" as tweets exclude "retweets" %}
+    ...
+    {% endcache %}
+
+
 Extra
 -----
 
@@ -103,5 +116,4 @@ with all needed links.
 Exception handling
 ~~~~~~~~~~~~~~~~~~
 
-If ``DEBUG==True`` any Twitter API exceptions like 'Over capacity' are raised and propagated,
-otherwise the're silenced.
+Any Twitter API exceptions like 'Over capacity' are silenced and logged.
