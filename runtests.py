@@ -1,8 +1,10 @@
+import os
 from django.core.management import execute_manager
 import sys
 from django.conf import settings
 
 PROJECT_APPS = ('twitter_tag', 'tests')
+ROOT_PATH = os.path.abspath(os.path.dirname(os.path.dirname(__file__)))
 
 try:
     import django_jenkins
@@ -28,6 +30,7 @@ settings.configure(DEBUG = True,
                         'django_jenkins.tasks.run_pep8',
                         'django_jenkins.tasks.run_pylint',
                    ),
+                   PYLINT_RCFILE = os.path.join(ROOT_PATH, 'tests', 'pylint.rc'),
                    ROOT_URLCONF = 'tests.urls'
 )
 

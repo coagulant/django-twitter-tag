@@ -1,25 +1,30 @@
 # -*- coding: utf-8 -*-
 import collections
+
 from django.conf import settings
 from django.core.cache import cache
 from django.template import Template, Context
 from django.template.base import TemplateSyntaxError
 from django.test import TestCase
-from mock import patch
 import twitter
-from twitter_tag.templatetags.twitter_tag import get_cache_key
+from mock import patch
 from testfixtures import log_capture
 
+from twitter_tag.templatetags.twitter_tag import get_cache_key
+
+
 class StubGenerator(object):
-    TWEET_STUBS = {'jresig': [{'text': "This is not John Resig - you should be following @jeresig instead!",
-                               'html': "This is not John Resig - you should be following <a href=\"http://twitter.com/jeresig\">@jeresig</a> instead!"}],
-                   'futurecolors': [{'text': u"JetBrains радуют новыми фичами и апдейтами старых. Пост из блога #pycharm про дебаг шаблонов джанги в их IDE http://ht.ly/6viu3"},
-                                    {'text': u"На новых проектах будем использовать django-jenkins и django-any http://t.co/FjhHpdwV http://t.co/Hig8Hsjg Очень полезные штуки."},
-                                    {'text': u"@goshakkk Переход на руби был связан именно с отсутствием поддержки py3k? :)",
-                                     'in_reply_to_user_id': 61236914},
-                                    {'text': u"Наконец-то начались какие-то попытки портировать #Django на #python3 http://t.co/XkftDsQH",
-                                     'retweeted': True},
-                                   ]
+    TWEET_STUBS = {'jresig':
+                       [{'text': "This is not John Resig - you should be following @jeresig instead!",
+                        'html': "This is not John Resig - you should be following <a href=\"http://twitter.com/jeresig\">@jeresig</a> instead!"}],
+                   'futurecolors':
+                       [{'text': u"JetBrains радуют новыми фичами и апдейтами старых. Пост из блога #pycharm про дебаг шаблонов джанги в их IDE http://ht.ly/6viu3"},
+                        {'text': u"На новых проектах будем использовать django-jenkins и django-any http://t.co/FjhHpdwV http://t.co/Hig8Hsjg Очень полезные штуки."},
+                        {'text': u"@goshakkk Переход на руби был связан именно с отсутствием поддержки py3k? :)",
+                         'in_reply_to_user_id': 61236914},
+                        {'text': u"Наконец-то начались какие-то попытки портировать #Django на #python3 http://t.co/XkftDsQH",
+                         'retweeted': True},
+                       ]
                   }
 
     @classmethod
