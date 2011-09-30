@@ -1,6 +1,9 @@
 0.3
 
+* Not raising Exception inside tempate tag in development mode
+* Cache last successful API call to make sure we are not serving empty tag
 * Added runtests.py
+* Moved repo and fixed url in setup.py
 
 0.2.1
 
