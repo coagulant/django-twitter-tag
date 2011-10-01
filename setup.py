@@ -7,12 +7,11 @@ read = lambda filepath: codecs.open(filepath, 'r', 'utf-8').read()
 tests_require = [
     'Django>=1.2,<1.4',
     'mock>=0.7.2',
-    'testfixtures>=2.0.1',
 ]
 
 setup(
     name='django-twitter-tag',
-    version='0.3',
+    version='0.3.1dev',
     author='Ilya Baryshev',
     author_email='baryshev@gmail.com',
     packages=find_packages(exclude=("tests")),

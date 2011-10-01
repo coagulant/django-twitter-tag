@@ -14,6 +14,7 @@ Just use tweet's ``html`` attrubute (see example below).
 Installation
 ------------
 
+Django Twitter Tag works with python 2.5-2.7.
 Recommended way to install is pip::
 
   pip install django-twitter-tag

@@ -2,6 +2,5 @@ django-templatetag-sugar==0.1
 python-twitter==0.8.2
 https://github.com/BonsaiDen/twitter-text-python/tarball/master#egg=twitter-text-python-1.0
 mock>=0.7.2
-testfixtures>=2.0.1
 django-jenkins>=0.11.1
 pep8>=0.6.1

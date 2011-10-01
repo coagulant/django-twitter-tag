@@ -1,3 +1,7 @@
+0.3.1
+
+* Added python 2.5 support
+
 0.3
 
 * Not raising Exception inside tempate tag in development mode

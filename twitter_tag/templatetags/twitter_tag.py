@@ -1,7 +1,7 @@
-from django import template
-from django.conf import settings
-from django.core.cache import cache
 import logging
+
+from django import template
+from django.core.cache import cache
 from templatetag_sugar.parser import Optional, Constant, Name, Variable
 from templatetag_sugar.register import tag
 import ttp
@@ -13,7 +13,7 @@ tweet_parser = ttp.Parser()
 
 
 def get_cache_key(*args):
-    return 'get_tweets_{0}'.format('_'.join([str(arg) for arg in args if arg]))
+    return 'get_tweets_%s' % ('_'.join([str(arg) for arg in args if arg]))
 
 
 @tag(register, [Constant("for"), Variable(), Constant("as"), Name(),
@@ -26,7 +26,7 @@ def get_tweets(context, username, asvar, exclude='', limit=None):
         user_last_tweets = twitter.Api().GetUserTimeline(screen_name=username,
                                                          include_rts=('retweets' not in exclude),
                                                          include_entities=True)
-    except twitter.TwitterError as e:
+    except twitter.TwitterError, e:
         logging.getLogger(__name__).error(e.message)
         context[asvar] = cache.get(cache_key, [])
         return ""
