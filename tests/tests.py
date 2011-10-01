@@ -4,8 +4,7 @@ import collections
 
 from django.conf import settings
 from django.core.cache import cache
-from django.template import Template, Context
-from django.template.base import TemplateSyntaxError
+from django.template import Template, Context, TemplateSyntaxError
 from django.test import TestCase
 import twitter
 from mock import patch
@@ -53,12 +52,13 @@ class StubGenerator(object):
 class TwitterTagTestCase(TestCase):
 
     def setUp(self):
-
-        patcher = patch('twitter.Api')
-        self.addCleanup(patcher.stop)
-        mock = patcher.start()
+        self.patcher = patch('twitter.Api')
+        mock = self.patcher.start()
         self.api = mock.return_value
         self.api.GetUserTimeline.side_effect = StubGenerator.get_timeline
+
+    def tearDown(self):
+        self.patcher.stop()
 
     def render_template(self, template):
         context = Context()
