@@ -1,4 +1,5 @@
 import logging
+from urllib2 import URLError
 
 from django import template
 from django.core.cache import cache
@@ -26,8 +27,8 @@ def get_tweets(context, username, asvar, exclude='', limit=None):
         user_last_tweets = twitter.Api().GetUserTimeline(screen_name=username,
                                                          include_rts=('retweets' not in exclude),
                                                          include_entities=True)
-    except twitter.TwitterError, e:
-        logging.getLogger(__name__).error(e.message)
+    except (twitter.TwitterError, URLError), e:
+        logging.getLogger(__name__).error(str(e))
         context[asvar] = cache.get(cache_key, [])
         return ""
 

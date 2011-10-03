@@ -1,5 +1,6 @@
 0.3.1
 
+* Fixed URLError exception handling
 * Added python 2.5 support
 * Added django 1.2 support
 

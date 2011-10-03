@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import with_statement
 import collections
+import urllib2
 
 from django.conf import settings
 from django.core.cache import cache
@@ -8,6 +9,7 @@ from django.template import Template, Context, TemplateSyntaxError
 from django.test import TestCase
 import twitter
 from mock import patch
+
 
 from twitter_tag.templatetags.twitter_tag import get_cache_key
 
@@ -49,8 +51,7 @@ class StubGenerator(object):
         return twitter.Status(**kwargs)
 
 
-class TwitterTagTestCase(TestCase):
-
+class BaseTwitterTagTeasCase(TestCase):
     def setUp(self):
         self.patcher = patch('twitter.Api')
         mock = self.patcher.start()
@@ -66,6 +67,8 @@ class TwitterTagTestCase(TestCase):
         output = template.render(context)
         return output, context
 
+    
+class TwitterTagTestCase(BaseTwitterTagTeasCase):
     def test_twitter_tag_simple_mock(self):
 
         output, context = self.render_template(template="""{% load twitter_tag %}{% get_tweets for "jresig" as tweets %}""")
@@ -120,35 +123,43 @@ class TwitterTagTestCase(TestCase):
         self.api.GetUserTimeline.assert_called_with(screen_name='futurecolors', include_rts=False, include_entities=True)
         self.assertEquals(len(context['tweets']), 2, 'Stub contains 4 tweets, including 1 reply & 1 retweet')
 
+
+class ExceptionHandlingTestCase(BaseTwitterTagTeasCase):
+
+    logger_name = 'twitter_tag.templatetags.twitter_tag'
+
     def test_bad_syntax(self):
         self.assertRaises(TemplateSyntaxError, Template, """{% load twitter_tag %}{% get_tweets %}""")
         self.assertRaises(TemplateSyntaxError, Template, """{% load twitter_tag %}{% get_tweets as "tweets" %}""")
 
     @patch('logging.getLogger')
-    def test_exception_is_propagated_but_logged(self, logging_mock):
+    def test_exception_is_not_propagated_but_logged(self, logging_mock):
         exception_message = "Capacity Error"
-        logger_name = 'twitter_tag.templatetags.twitter_tag'
         self.api.GetUserTimeline.side_effect = twitter.TwitterError(exception_message)
 
-        with patch.object(settings, 'DEBUG', True):
-            output, context = self.render_template(
+        output, context = self.render_template(
+            template="""{% load twitter_tag %}{% get_tweets for "twitter" as tweets %}""")
+        self.assertEqual(output, '')
+        self.assertEqual(context['tweets'], [])
+
+        logging_mock.assert_called_with(self.logger_name)
+        logging_mock.return_value.error.assert_called_with(exception_message)
+
+    @patch('logging.getLogger')
+    def test_urlerror_exception(self, logging_mock):
+        exception_message = "Twitter.com is not resolving"
+        self.api.GetUserTimeline.side_effect = urllib2.URLError(exception_message)
+        
+        output, context = self.render_template(
                 template="""{% load twitter_tag %}{% get_tweets for "twitter" as tweets %}""")
-            self.assertEqual(output, '')
-            self.assertEqual(context['tweets'], [])
+        self.assertEqual(output, '')
+        self.assertEqual(context['tweets'], [])
 
-        with patch.object(settings, 'DEBUG', False):
-            output, context = self.render_template(
-                template="""{% load twitter_tag %}{% get_tweets for "twitter" as tweets %}""")
-            self.assertEqual(output, '')
-            self.assertEqual(context['tweets'], [])
+        logging_mock.assert_called_with(self.logger_name)
+        logging_mock.return_value.error.assert_called_with('<urlopen error %s>' % exception_message)
 
-            logging_mock.assert_called_with(logger_name)
-            logging_mock.return_value.error.assert_called_with(exception_message)
-
-    @patch.object(settings, 'DEBUG', False)
     @patch('logging.getLogger')
     def test_get_from_cache_when_twitter_api_fails(self, logging_mock):
-        logger_name = 'twitter_tag.templatetags.twitter_tag'
         exception_message = 'Technical Error'
         # it should be ok by now
         self.render_template(
@@ -163,5 +174,5 @@ class TwitterTagTestCase(TestCase):
             template="""{% load twitter_tag %}{% get_tweets for "jresig" as tweets %}""")
         self.assertEquals(len(context['tweets']), 1, 'jresig account has only one tweet')
         self.assertEqual(context['tweets'][0].text, StubGenerator.TWEET_STUBS['jresig'][0]['text'])
-        logging_mock.assert_called_with(logger_name)
+        logging_mock.assert_called_with(self.logger_name)
         logging_mock.return_value.error.assert_called_with(exception_message)
