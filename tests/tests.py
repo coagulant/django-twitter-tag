@@ -3,13 +3,12 @@ from __future__ import with_statement
 import collections
 import urllib2
 
-from django.conf import settings
 from django.core.cache import cache
 from django.template import Template, Context, TemplateSyntaxError
 from django.test import TestCase
 import twitter
 from mock import patch
-
+from truncated_tweet import TWEET_JSON
 
 from twitter_tag.templatetags.twitter_tag import get_cache_key
 
@@ -25,7 +24,7 @@ class StubGenerator(object):
                          'in_reply_to_user_id': 61236914},
                         {'text': u"Наконец-то начались какие-то попытки портировать #Django на #python3 http://t.co/XkftDsQH",
                          'retweeted': True},
-                       ]
+                       ],
                   }
 
     @classmethod
@@ -51,7 +50,7 @@ class StubGenerator(object):
         return twitter.Status(**kwargs)
 
 
-class BaseTwitterTagTeasCase(TestCase):
+class BaseTwitterTagTestCase(TestCase):
     def setUp(self):
         self.patcher = patch('twitter.Api')
         mock = self.patcher.start()
@@ -67,8 +66,22 @@ class BaseTwitterTagTeasCase(TestCase):
         output = template.render(context)
         return output, context
 
-    
-class TwitterTagTestCase(BaseTwitterTagTeasCase):
+
+class TrimmedTweet(BaseTwitterTagTestCase):
+    def setUp(self):
+        self.patcher = patch('twitter.Api')
+        mock = self.patcher.start()
+        self.api = mock.return_value
+        self.api.GetUserTimeline.return_value = [twitter.Status(**TWEET_JSON)]
+
+    def test_trimmed_tweet(self):
+        output, context = self.render_template(template="""{% load twitter_tag %}{% get_tweets for "futurecolors" as tweets %}""")
+        self.assertTrue(context['tweets'][0].text.endswith('...'))
+        self.assertFalse(context['tweets'][0].html.endswith('...'))
+        self.assertTrue(context['tweets'][0].html.startswith(u'RT <a href="http://twitter.com/futurecolors">@futurecolors</a>: '))
+
+
+class TwitterTagTestCase(BaseTwitterTagTestCase):
     def test_twitter_tag_simple_mock(self):
 
         output, context = self.render_template(template="""{% load twitter_tag %}{% get_tweets for "jresig" as tweets %}""")
@@ -124,7 +137,7 @@ class TwitterTagTestCase(BaseTwitterTagTeasCase):
         self.assertEquals(len(context['tweets']), 2, 'Stub contains 4 tweets, including 1 reply & 1 retweet')
 
 
-class ExceptionHandlingTestCase(BaseTwitterTagTeasCase):
+class ExceptionHandlingTestCase(BaseTwitterTagTestCase):
 
     logger_name = 'twitter_tag.templatetags.twitter_tag'
 
