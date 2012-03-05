@@ -36,9 +36,8 @@ def get_tweets(context, username, asvar, exclude='', limit=None):
         if 'replies' in exclude and status.GetInReplyToUserId() is not None:
             continue
 
-
         if status.truncated and status.GetRetweeted_status():
-            text = u'RT @{username}: {text}'.format(username=username, text=status.GetRetweeted_status()['text'])
+            text = u'RT @%s: %s' % (username, status.GetRetweeted_status()['text'])
         else:
             text = status.GetText()
         status.html = tweet_parser.parse(text).html
