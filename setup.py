@@ -5,7 +5,8 @@ from setuptools import setup, find_packages
 read = lambda filepath: codecs.open(filepath, 'r', 'utf-8').read()
 
 tests_require = [
-    'Django>=1.2,<1.4',
+    'Django>=1.2',
+    'nose',
     'mock>=0.7.2',
 ]
 

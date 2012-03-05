@@ -14,7 +14,7 @@ Just use tweet's ``html`` attrubute (see example below).
 Installation
 ------------
 
-This app works with python 2.5-2.7, Django 1.2 and higher.
+This app works with python 2.6 and higher, Django 1.3 and higher.
 
 Recommended way to install is pip::
 

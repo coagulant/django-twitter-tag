@@ -2,16 +2,41 @@
 from __future__ import with_statement
 import collections
 import urllib2
-
 from django.core.cache import cache
 from django.template import Template, Context, TemplateSyntaxError
 from django.test import TestCase
 import twitter
 from mock import patch
-from truncated_tweet import TWEET_JSON
-
 from twitter_tag.templatetags.twitter_tag import get_cache_key
 
+
+TWEET_JSON = {"created_at": "Mon Feb 27 20:53:48 +0000 2012", "favorited": False, "id": 174235806314139650, "retweet_count": 1,
+        "retweeted": False, "retweeted_status": {"created_at": "Mon Feb 27 20:18:52 +0000 2012", "favorited": False,
+                                                 "id": 174227015380111363, "in_reply_to_screen_name": "futurecolors",
+                                                 "in_reply_to_status_id": 174225572497596416, "in_reply_to_user_id": 54171637,
+                                                 "retweet_count": 1, "retweeted": False,
+                                                 "source": "<a href=\"http://itunes.apple.com/us/app/twitter/id409789998?mt=12\" rel=\"nofollow\">Twitter for Mac</a>",
+                                                 "text": "@futurecolors \u0447\u0435\u0440\u0435\u0437 \u043d\u0435\u0441\u043a\u043e\u043b\u044c\u043a\u043e \u043c\u0435\u0441\u044f\u0446\u0435\u0432 \u0431\u0443\u0434\u0435\u0442 \u0438 \u043f\u043e\u0434\u0434\u0435\u0440\u0436\u043a\u0430 \u043f\u0440\u0438\u0432\u0430\u0442\u043d\u044b\u0445 \u0440\u0435\u043f\u043e\u0437\u0438\u0442\u043e\u0440\u0438\u0435\u0432 (\u043d\u0430 http://t.co/aVQRnBKP). \u041f\u043e\u0434\u0440\u043e\u0431\u043d\u0435\u0435: http://t.co/7KgHV8iI",
+                                                 "truncated": False, "user": {"created_at": "Tue Feb 15 08:34:44 +0000 2011",
+                                                                              "description": "Hi I'm Travis.\r\n\r\nI'm a distributed continuous integration service for the open source community \u2014 currently in early alpha, and I'm looking for your help!",
+                                                                              "favourites_count": 3, "followers_count": 1704,
+                                                                              "friends_count": 602, "id": 252481460,
+                                                                              "lang": "en", "listed_count": 72,
+                                                                              "name": "Travis CI", "profile_background_color": "C0DEED",
+                                                                              "profile_background_tile": False, "profile_image_url": "http://a0.twimg.com/profile_images/1788260785/travis_normal.png",
+                                                                              "profile_link_color": "0084B4", "profile_sidebar_fill_color": "http://a0.twimg.com/images/themes/theme1/bg.png",
+                                                                              "profile_text_color": "333333", "protected": False, "screen_name": "travisci", "statuses_count": 1098,
+                                                                              "url": "http://travis-ci.org"}},
+        "source": "web", "text": "RT @travisci: @futurecolors \u0447\u0435\u0440\u0435\u0437 \u043d\u0435\u0441\u043a\u043e\u043b\u044c\u043a\u043e \u043c\u0435\u0441\u044f\u0446\u0435\u0432 \u0431\u0443\u0434\u0435\u0442 \u0438 \u043f\u043e\u0434\u0434\u0435\u0440\u0436\u043a\u0430 \u043f\u0440\u0438\u0432\u0430\u0442\u043d\u044b\u0445 \u0440\u0435\u043f\u043e\u0437\u0438\u0442\u043e\u0440\u0438\u0435\u0432 (\u043d\u0430 http://t.co/aVQRnBKP). \u041f\u043e\u0434\u0440\u043e\u0431\u043d\u0435\u0435: http: ...",
+        "truncated": True, "user": {"created_at": "Mon Jul 06 10:27:52 +0000 2009",
+                                    "description": "\u041c\u044b \u0440\u0435\u0433\u0443\u043b\u044f\u0440\u043d\u043e \u043f\u0438\u0448\u0435\u043c \u043f\u0440\u043e \u043d\u0430\u0448\u0438 \u0434\u043e\u0441\u0442\u0438\u0436\u0435\u043d\u0438\u044f \u0432 \u0438\u043d\u0442\u0435\u0440\u043d\u0435\u0442\u0430\u0445 \u0438 \u043f\u0440\u043e \u043d\u043e\u0432\u043e\u0441\u0442\u0438 \u0432\u0435\u0431-\u0440\u0430\u0437\u0440\u0430\u0431\u043e\u0442\u043a\u0438.",
+                                    "favourites_count": 10, "followers_count": 202, "friends_count": 75,
+                                    "id": 54171637, "lang": "ru", "listed_count": 14, "location": "Moscow, Russia",
+                                    "name": "\u0421\u0442\u0443\u0434\u0438\u044f Future Colors", "profile_background_color": "ffffff",
+                                    "profile_background_tile": False, "profile_image_url": "http://a2.twimg.com/profile_images/299739915/fc_twitter_normal.png",
+                                    "profile_link_color": "0084B4", "profile_sidebar_fill_color": "http://a0.twimg.com/images/themes/theme1/bg.png",
+                                    "profile_text_color": "333333", "protected": False, "screen_name": "futurecolors", "statuses_count": 592,
+                                    "time_zone": "Moscow", "url": "http://futurecolors.ru", "utc_offset": 14400}}
 
 class StubGenerator(object):
     TWEET_STUBS = {'jresig':
