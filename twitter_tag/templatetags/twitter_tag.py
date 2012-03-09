@@ -19,8 +19,9 @@ def get_cache_key(*args):
 
 @tag(register, [Constant("for"), Variable(), Constant("as"), Name(),
                 Optional([Constant("exclude"), Variable("exclude")]),
+                Optional([Constant("expandurls"), Variable("expandurls")]),
                 Optional([Constant("limit"), Variable("limit")])])
-def get_tweets(context, username, asvar, exclude='', limit=None):
+def get_tweets(context, username, asvar, exclude='', expandurls=True, limit=None):
     cache_key = get_cache_key(username, asvar, exclude, limit)
     tweets = []
     try:
@@ -36,10 +37,14 @@ def get_tweets(context, username, asvar, exclude='', limit=None):
         if 'replies' in exclude and status.GetInReplyToUserId() is not None:
             continue
 
-        if status.truncated and status.GetRetweeted_status():
+        if status.GetRetweeted_status():
             text = u'RT @%s: %s' % (username, status.GetRetweeted_status()['text'])
         else:
             text = status.GetText()
+        print status.urls
+        if expandurls and status.urls:
+            for status_url in status.urls:
+                text.replace(status_url.url, status_url.expanded_url)
         status.html = tweet_parser.parse(text).html
         tweets.append(status)
 
