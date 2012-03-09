@@ -4,9 +4,9 @@ import collections
 import urllib2
 from django.core.cache import cache
 from django.template import Template, Context, TemplateSyntaxError
-from django.test import TestCase
 import twitter
 from mock import patch
+from unittest import TestCase
 from twitter_tag.templatetags.twitter_tag import get_cache_key
 
 
