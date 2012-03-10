@@ -23,6 +23,8 @@ TWEET_JSON = {'created_at': 'Mon Feb 27 20:53:48 +0000 2012',
   'in_reply_to_user_id': 54171637,
   'retweet_count': 1,
   'retweeted': False,
+  'urls': [twitter.Url(url='http://t.co/aVQRnBKP', expanded_url='http://travis-ci.com'),
+           twitter.Url(url='http://t.co/7KgHV8iI', expanded_url='http://love.travis-ci.org')],
   'source': '<a href="http://itunes.apple.com/us/app/twitter/id409789998?mt=12" rel="nofollow">Twitter for Mac</a>',
   'text': u'@futurecolors \u0447\u0435\u0440\u0435\u0437 \u043d\u0435\u0441\u043a\u043e\u043b\u044c\u043a\u043e \u043c\u0435\u0441\u044f\u0446\u0435\u0432 \u0431\u0443\u0434\u0435\u0442 \u0438 \u043f\u043e\u0434\u0434\u0435\u0440\u0436\u043a\u0430 \u043f\u0440\u0438\u0432\u0430\u0442\u043d\u044b\u0445 \u0440\u0435\u043f\u043e\u0437\u0438\u0442\u043e\u0440\u0438\u0435\u0432 (\u043d\u0430 http://t.co/aVQRnBKP). \u041f\u043e\u0434\u0440\u043e\u0431\u043d\u0435\u0435: http://t.co/7KgHV8iI',
   'truncated': False,
@@ -48,6 +50,7 @@ TWEET_JSON = {'created_at': 'Mon Feb 27 20:53:48 +0000 2012',
  'source': 'web',
  'text': u'RT @travisci: @futurecolors \u0447\u0435\u0440\u0435\u0437 \u043d\u0435\u0441\u043a\u043e\u043b\u044c\u043a\u043e \u043c\u0435\u0441\u044f\u0446\u0435\u0432 \u0431\u0443\u0434\u0435\u0442 \u0438 \u043f\u043e\u0434\u0434\u0435\u0440\u0436\u043a\u0430 \u043f\u0440\u0438\u0432\u0430\u0442\u043d\u044b\u0445 \u0440\u0435\u043f\u043e\u0437\u0438\u0442\u043e\u0440\u0438\u0435\u0432 (\u043d\u0430 http://t.co/aVQRnBKP). \u041f\u043e\u0434\u0440\u043e\u0431\u043d\u0435\u0435: http: ...',
  'truncated': False,
+ 'urls': [twitter.Url(url='http://t.co/aVQRnBKP', expanded_url='http://travis-ci.com'),],
  'user': {'created_at': 'Mon Jul 06 10:27:52 +0000 2009',
   'description': u'\u041c\u044b \u0440\u0435\u0433\u0443\u043b\u044f\u0440\u043d\u043e \u043f\u0438\u0448\u0435\u043c \u043f\u0440\u043e \u043d\u0430\u0448\u0438 \u0434\u043e\u0441\u0442\u0438\u0436\u0435\u043d\u0438\u044f \u0432 \u0438\u043d\u0442\u0435\u0440\u043d\u0435\u0442\u0430\u0445 \u0438 \u043f\u0440\u043e \u043d\u043e\u0432\u043e\u0441\u0442\u0438 \u0432\u0435\u0431-\u0440\u0430\u0437\u0440\u0430\u0431\u043e\u0442\u043a\u0438.',
   'favourites_count': 10,
@@ -126,7 +129,7 @@ class BaseTwitterTagTestCase(TestCase):
         return output, context
 
 
-class TrimmedTweet(BaseTwitterTagTestCase):
+class ExtendedFeaturesTweet(BaseTwitterTagTestCase):
     def setUp(self):
         self.patcher = patch('twitter.Api')
         mock = self.patcher.start()
@@ -139,14 +142,6 @@ class TrimmedTweet(BaseTwitterTagTestCase):
         self.assertTrue(context['tweets'][0].text.endswith(u'...'))
         self.assertFalse(context['tweets'][0].html.endswith(u'...'))
         self.assertTrue(context['tweets'][0].html.startswith(u'RT <a href="http://twitter.com/futurecolors">@futurecolors</a>: '))
-
-
-class TweetWithExpandedURLS(BaseTwitterTagTestCase):
-    def setUp(self):
-        self.patcher = patch('twitter.Api')
-        mock = self.patcher.start()
-        self.api = mock.return_value
-        self.api.GetUserTimeline.return_value = [twitter.Status(**TWEET_JSON)]
 
     def test_url_is_expanded(self):
         output, context = self.render_template(template="""{% load twitter_tag %}{% get_tweets for "futurecolors" as tweets %}""")

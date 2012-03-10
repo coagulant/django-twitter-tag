@@ -39,12 +39,13 @@ def get_tweets(context, username, asvar, exclude='', expandurls=True, limit=None
 
         if status.GetRetweeted_status():
             text = u'RT @%s: %s' % (username, status.GetRetweeted_status()['text'])
+            urls = status.GetRetweeted_status()['urls']
         else:
             text = status.GetText()
-        print status.urls
-        if expandurls and status.urls:
-            for status_url in status.urls:
-                text.replace(status_url.url, status_url.expanded_url)
+            urls = status.urls
+        if expandurls and urls:
+            for status_url in urls:
+                text = text.replace(status_url.url, status_url.expanded_url)
         status.html = tweet_parser.parse(text).html
         tweets.append(status)
 

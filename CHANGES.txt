@@ -1,6 +1,7 @@
 0.4.0dev
 
 * Fixed tweet truncation for retweets
+* Added url expansion in tweets
 * Added tox and travis support
 
 0.3.1
