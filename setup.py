@@ -8,7 +8,6 @@ tests_require = [
     'Django>=1.2',
     'nose',
     'mock>=0.7.2',
-    'unittest2',
 ]
 
 setup(
