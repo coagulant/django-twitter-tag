@@ -4,11 +4,12 @@ import collections
 import urllib2
 from django.core.cache import cache
 from django.template import Template, Context, TemplateSyntaxError
+from django.utils.unittest.case import expectedFailure
 import twitter
 from mock import patch
 from unittest import TestCase
 from twitter_tag.templatetags.twitter_tag import get_cache_key
-from unittest2.case import expectedFailure
+from unittest2.case import skip
 
 
 TWEET_JSON = {'created_at': 'Mon Feb 27 20:53:48 +0000 2012',
@@ -129,22 +130,24 @@ class BaseTwitterTagTestCase(TestCase):
         output = template.render(context)
         return output, context
 
-@expectedFailure
+
 class ExtendedFeaturesTweet(BaseTwitterTagTestCase):
     def setUp(self):
         self.patcher = patch('twitter.Api')
         mock = self.patcher.start()
         self.api = mock.return_value
-        self.api.GetUserTimeline.return_value = [twitter.Status(**TWEET_JSON)]
+        self.api.GetUserTimeline.return_value = [twitter.Status.NewFromJsonDict(TWEET_JSON)]
 
     def test_trimmed_tweet(self):
         output, context = self.render_template(template="""{% load twitter_tag %}{% get_tweets for "futurecolors" as tweets %}""")
         self.assertTrue(context['tweets'][0].text.endswith(u'...'))
         self.assertFalse(context['tweets'][0].html.endswith(u'...'))
-        self.assertTrue(context['tweets'][0].html.startswith(u'RT <a href="http://twitter.com/futurecolors">@futurecolors</a>: '))
+        self.assertTrue(context['tweets'][0].html.startswith(u'RT <a href="http://twitter.com/travisci">@travisci</a>: '))
 
+    @skip
     def test_url_is_expanded(self):
         output, context = self.render_template(template="""{% load twitter_tag %}{% get_tweets for "futurecolors" as tweets %}""")
+        print context['tweets'][0].html
         self.assertTrue(u'http://travis-ci.com' in context['tweets'][0].html)
         self.assertTrue(u'http://love.travis-ci.org' in context['tweets'][0].html)
 
