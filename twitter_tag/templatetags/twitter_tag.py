@@ -10,7 +10,7 @@ import twitter
 
 
 register = template.Library()
-tweet_parser = ttp.Parser()
+tweet_parser = ttp.Parser(max_url_length=60)
 
 
 def get_cache_key(*args):
@@ -37,9 +37,9 @@ def get_tweets(context, username, asvar, exclude='', expandurls=True, limit=None
         if 'replies' in exclude and status.GetInReplyToUserId() is not None:
             continue
 
-        if status.GetRetweeted_status():
-            text = u'RT @%s: %s' % (username, status.GetRetweeted_status()['text'])
-            urls = status.GetRetweeted_status()['urls']
+        if status.retweeted_status:
+            text = u'RT @%s: %s' % (status.retweeted_status.user.screen_name, status.retweeted_status.text)
+            urls = status.retweeted_status.urls
         else:
             text = status.GetText()
             urls = status.urls
