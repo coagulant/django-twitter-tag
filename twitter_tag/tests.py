@@ -4,12 +4,10 @@ import collections
 import urllib2
 from django.core.cache import cache
 from django.template import Template, Context, TemplateSyntaxError
-from django.utils.unittest.case import expectedFailure
 import twitter
 from mock import patch
 from unittest import TestCase
 from twitter_tag.templatetags.twitter_tag import get_cache_key
-from unittest2.case import skip
 
 
 TWEET_JSON = {'created_at': 'Mon Feb 27 20:53:48 +0000 2012',
@@ -25,8 +23,10 @@ TWEET_JSON = {'created_at': 'Mon Feb 27 20:53:48 +0000 2012',
   'in_reply_to_user_id': 54171637,
   'retweet_count': 1,
   'retweeted': False,
-  'urls': [twitter.Url(url='http://t.co/aVQRnBKP', expanded_url='http://travis-ci.com'),
-           twitter.Url(url='http://t.co/7KgHV8iI', expanded_url='http://love.travis-ci.org')],
+  'entities': {
+      'urls': [{'url': 'http://t.co/aVQRnBKP', 'expanded_url': 'http://travis-ci.com' },
+              {'url': 'http://t.co/7KgHV8iI', 'expanded_url': 'http://love.travis-ci.org' },]
+  },
   'source': '<a href="http://itunes.apple.com/us/app/twitter/id409789998?mt=12" rel="nofollow">Twitter for Mac</a>',
   'text': u'@futurecolors \u0447\u0435\u0440\u0435\u0437 \u043d\u0435\u0441\u043a\u043e\u043b\u044c\u043a\u043e \u043c\u0435\u0441\u044f\u0446\u0435\u0432 \u0431\u0443\u0434\u0435\u0442 \u0438 \u043f\u043e\u0434\u0434\u0435\u0440\u0436\u043a\u0430 \u043f\u0440\u0438\u0432\u0430\u0442\u043d\u044b\u0445 \u0440\u0435\u043f\u043e\u0437\u0438\u0442\u043e\u0440\u0438\u0435\u0432 (\u043d\u0430 http://t.co/aVQRnBKP). \u041f\u043e\u0434\u0440\u043e\u0431\u043d\u0435\u0435: http://t.co/7KgHV8iI',
   'truncated': False,
@@ -144,7 +144,6 @@ class ExtendedFeaturesTweet(BaseTwitterTagTestCase):
         self.assertFalse(context['tweets'][0].html.endswith(u'...'))
         self.assertTrue(context['tweets'][0].html.startswith(u'RT <a href="http://twitter.com/travisci">@travisci</a>: '))
 
-    @skip
     def test_url_is_expanded(self):
         output, context = self.render_template(template="""{% load twitter_tag %}{% get_tweets for "futurecolors" as tweets %}""")
         print context['tweets'][0].html
