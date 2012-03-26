@@ -1,6 +1,8 @@
 Django Twitter Tag
 ==================
 
+.. image:: https://secure.travis-ci.org/coagulant/django-twitter-tag.png?branch=dev
+
 A django template tag to display user's recent tweets.
 
 You can limit number of tweets, filter out replies and retweets.
