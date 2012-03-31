@@ -66,7 +66,11 @@ To filter out tweet replies (that start with @ char)::
 To ignore native retweets::
 
     {% get_tweets for "futurecolors" as tweets exclude "retweets" %}
-    
+
+
+To disable short urls expansion::
+
+    {% get_tweets for "futurecolors" as tweets expandurls 0 %}
 
 Caching
 -------

@@ -146,9 +146,13 @@ class ExtendedFeaturesTweet(BaseTwitterTagTestCase):
 
     def test_url_is_expanded(self):
         output, context = self.render_template(template="""{% load twitter_tag %}{% get_tweets for "futurecolors" as tweets %}""")
-        print context['tweets'][0].html
         self.assertTrue(u'http://travis-ci.com' in context['tweets'][0].html)
         self.assertTrue(u'http://love.travis-ci.org' in context['tweets'][0].html)
+
+    def test_url_is_not_expanded(self):
+        output, context = self.render_template(template="""{% load twitter_tag %}{% get_tweets for "futurecolors" as tweets expandurls 0 %}""")
+        self.assertTrue(u'http://t.co/aVQRnBKP' in context['tweets'][0].html)
+        self.assertTrue(u'http://t.co/7KgHV8iI' in context['tweets'][0].html)
 
 
 class TwitterTagTestCase(BaseTwitterTagTestCase):
