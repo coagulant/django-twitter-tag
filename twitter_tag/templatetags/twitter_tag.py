@@ -10,7 +10,6 @@ import twitter
 
 
 register = template.Library()
-tweet_parser = ttp.Parser(max_url_length=60)
 
 
 def get_cache_key(*args):
@@ -19,9 +18,10 @@ def get_cache_key(*args):
 
 @tag(register, [Constant("for"), Variable(), Constant("as"), Name(),
                 Optional([Constant("exclude"), Variable("exclude")]),
-                Optional([Constant("expandurls"), Variable("expandurls")]),
+                Optional([Constant("max_url_length"), Variable("max_url_length")]),
                 Optional([Constant("limit"), Variable("limit")])])
-def get_tweets(context, username, asvar, exclude='', expandurls=True, limit=None):
+def get_tweets(context, username, asvar, exclude='', max_url_length=60, limit=None):
+    tweet_parser = ttp.Parser(max_url_length=max_url_length)
     cache_key = get_cache_key(username, asvar, exclude, limit)
     tweets = []
     try:
@@ -43,7 +43,7 @@ def get_tweets(context, username, asvar, exclude='', expandurls=True, limit=None
         else:
             text = status.GetText()
             urls = status.urls
-        if expandurls and urls:
+        if max_url_length and urls:
             for status_url in urls:
                 text = text.replace(status_url.url, status_url.expanded_url)
         status.html = tweet_parser.parse(text).html

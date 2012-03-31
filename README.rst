@@ -70,7 +70,7 @@ To ignore native retweets::
 
 To disable short urls expansion::
 
-    {% get_tweets for "futurecolors" as tweets expandurls 0 %}
+    {% get_tweets for "futurecolors" as tweets max_url_length 0 %}
 
 Caching
 -------
