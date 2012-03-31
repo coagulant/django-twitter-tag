@@ -3,6 +3,7 @@
 * Fixed tweet truncation for retweets
 * Added url expansion in tweets
 * Added tox and travis support
+* Support for cyrillic hashtags
 
 0.3.1
 

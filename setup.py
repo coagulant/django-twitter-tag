@@ -21,12 +21,12 @@ setup(
     description="A django template tag to display user's recent tweets.",
     long_description=read(path.join(path.dirname(__file__), 'README.rst')),
     dependency_links=[
-        'https://github.com/BonsaiDen/twitter-text-python/tarball/master#egg=twitter-text-python-1.0',
+        'https://github.com/coagulant/twitter-text-python/tarball/master#egg=twitter-text-python-1.0',
     ],
     install_requires=[
         "django-templatetag-sugar==0.1",
         "python-twitter==0.8.2",
-        "twitter-text-python>=1.0"
+        "twitter-text-python==1.0"
     ],
     tests_require=tests_require,
     test_suite = "runtests",
