@@ -6,16 +6,19 @@ read = lambda filepath: codecs.open(filepath, 'r', 'utf-8').read()
 
 tests_require = [
     'Django>=1.2',
-    'nose',
+    'nose==1.2.1',
+    'nose-setenv',
     'mock>=0.7.2',
+    'httpretty',
+    'sure',
 ]
 
 setup(
     name='django-twitter-tag',
-    version='0.4.0',
+    version='1.0.0dev',
     author='Ilya Baryshev',
     author_email='baryshev@gmail.com',
-    packages=find_packages(exclude=("tests")),
+    packages=find_packages(exclude="tests"),
     url='https://github.com/coagulant/django-twitter-tag',
     license='MIT',
     description="A django template tag to display user's recent tweets.",
@@ -24,12 +27,12 @@ setup(
         'https://github.com/coagulant/twitter-text-python/tarball/master#egg=twitter-text-python-1.0',
     ],
     install_requires=[
-        "django-templatetag-sugar==0.1",
-        "python-twitter==0.8.2",
+        "django-classy-tags==0.4",
+        "twitter==1.9.1",
         "twitter-text-python==1.0"
     ],
     tests_require=tests_require,
-    test_suite = "runtests",
+    test_suite = "nose.collector",
     extras_require={'test': tests_require},
     classifiers = [
         'Development Status :: 4 - Beta',
@@ -38,5 +41,8 @@ setup(
         'License :: OSI Approved :: MIT License',
         'Operating System :: OS Independent',
         'Programming Language :: Python',
+        'Programming Language :: Python :: 2.6',
+        'Programming Language :: Python :: 2.7',
+        'Programming Language :: Python :: 2 :: Only',
     ],
 )
