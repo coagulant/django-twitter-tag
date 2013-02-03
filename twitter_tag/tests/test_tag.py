@@ -4,6 +4,7 @@ import json
 import os
 import unittest
 import warnings
+import datetime
 
 from mock import patch
 from sure import expect
@@ -135,6 +136,15 @@ class UsernameTag(unittest.TestCase):
                 json_mocks=['jeresig.json'],
             )
             assert len(w) == 0
+
+    @httprettified
+    def test_datetime(self):
+        output, context = self.render(
+            template="""{% get_tweets for "jresig" as tweets %}""",
+            json_mocks='jeresig.json',
+        )
+        # Fri Mar 21 19:42:21 +0000 2008
+        self.assertEquals(context['tweets'][0]['datetime'], datetime.datetime(2008, 3, 21, 19, 42, 21))
 
     @httprettified
     def test_html(self):

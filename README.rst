@@ -8,8 +8,9 @@ A django template tag to display user's recent tweets.
 Version 1.0 uses Twitter API 1.1.
 
 Basic features are limiting numbers of displayed tweets, filtering out replies and retweets.
-Library exposes each tweet ``json`` in template, adding extra attribute: ``html``.
-It makes urls, hashtags or twitter usernames clickable, juts like you expect them to be.
+Library exposes each tweet ``json`` in template, adding extra attributes: ``html`` and ``datetime``.
+First one makes urls, hashtags or twitter usernames clickable, juts like you expect them to be.
+Last one provides python datetime object to ease output in templates.
 Urs are expanded by default. Library handles twitter exceptions gracefully,
 returning last successful response.
 
@@ -133,6 +134,9 @@ Tweet's properties
 
 get_tweets returns a list of tweets into context. Each tweets is a json dict, that has
 exactly the same attrubutes, as stated in API 1.1 docs, describing `tweet json`_.
+Tweet's created timestamp is converted to python object and is available in templates::
+
+    {{ tweet.datetime|date:"D d M Y" }}
 
 .. _tweet json: https://dev.twitter.com/docs/platform-objects/tweets
 

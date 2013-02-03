@@ -1,4 +1,5 @@
 from __future__ import unicode_literals
+from datetime import datetime
 import logging
 
 from django import template
@@ -42,6 +43,8 @@ class TwitterTag(Tag):
         """ Apply the local presentation logic to the fetched data."""
         text = expand_tweet_urls(tweet, max_url_length)
         tweet['html'] = urlize_twitter_text(text, max_url_length)
+        # parses created_at "Wed Aug 27 13:08:45 +0000 2008"
+        tweet['datetime'] = datetime.strptime(tweet['created_at'], '%a %b %d %H:%M:%S +0000 %Y')
         return tweet
 
     # noinspection PyMethodOverriding
