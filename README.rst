@@ -36,7 +36,7 @@ Usage
 
 See how it looks like `on our site`_.
 
-.. _on our site:http://futurecolors.ru/
+.. _on our site: http://futurecolors.ru/
 
 
 Installation
@@ -50,7 +50,7 @@ Recommended way to install is pip::
   pip install django-twitter-tag
 
 
-* Add ``twitter_tag`` to ``INSTALLED_APPS`` in settings.py::
+Add ``twitter_tag`` to ``INSTALLED_APPS`` in settings.py::
 
     INSTALLED_APPS = (...
                       'twitter_tag',
@@ -68,7 +68,7 @@ app page. The `process of obtaining a token`_ is explained in detail in docs.
 Here is an example of how your config might look like::
 
     # settings.py
-    # Make sure to replace with out own, there values are made up
+    # Make sure to replace with your own values, theses are just made up
 
     # Your access token: Access token
     TWITTER_OAUTH_TOKEN = '91570701-BQMM5Ix9AJUC5JtM5Ix9DtwNAiaaYIYGN2CyPgduPVZKSX'
@@ -82,10 +82,10 @@ Here is an example of how your config might look like::
 For best performance you should set up `django cache framework`_. Cache is used both internally
 to store last successful json response and externally (see Caching below).
 
-.. _API 1.1:
-.. _create an application:https://dev.twitter.com/apps
-.. _process of obtaining a token:https://dev.twitter.com/docs/auth/tokens-devtwittercom
-.. _django cache framework:https://docs.djangoproject.com/en/dev/topics/cache/
+.. _API 1.1: https://dev.twitter.com/docs/api/1.1
+.. _create an application: https://dev.twitter.com/apps
+.. _process of obtaining a token: https://dev.twitter.com/docs/auth/tokens-devtwittercom
+.. _django cache framework: https://docs.djangoproject.com/en/dev/topics/cache/
 
 Examples
 --------
@@ -123,7 +123,7 @@ and avoid reaching `rate limit`_ (currently, 180 reqs in 15 minutes)::
     {% endcache %}
 
 
-.. _rate limit:https://dev.twitter.com/docs/rate-limiting/1.1
+.. _rate limit: https://dev.twitter.com/docs/rate-limiting/1.1
 
 Extra
 -----
@@ -134,7 +134,7 @@ Tweet's properties
 get_tweets returns a list of tweets into context. Each tweets is a json dict, that has
 exactly the same attrubutes, as stated in API 1.1 docs, describing `tweet json`_.
 
-.. _tweet json:https://dev.twitter.com/docs/platform-objects/tweets
+.. _tweet json: https://dev.twitter.com/docs/platform-objects/tweets
 
 Tweet's html
 ~~~~~~~~~~~~
@@ -143,7 +143,7 @@ Tweet also has extra ``html`` property, which contains tweet, formatted for html
 with all needed links. Note, Twitter has `guidelines for developers`_ on how embeded tweets
 should look like.
 
-.. _guidelines for developers:https://dev.twitter.com/terms/display-requirements
+.. _guidelines for developers: https://dev.twitter.com/terms/display-requirements
 
 Exception handling
 ~~~~~~~~~~~~~~~~~~
@@ -151,7 +151,7 @@ Exception handling
 Any Twitter API exceptions like 'Over capacity' are silenced and logged.
 Django cache is used internally to store last successful response in case `twitter is down`_.
 
-.. _twitter is down:https://dev.twitter.com/docs/error-codes-responses
+.. _twitter is down: https://dev.twitter.com/docs/error-codes-responses
 
 Tests
 -----
