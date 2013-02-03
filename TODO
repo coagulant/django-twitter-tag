@@ -1,7 +1,14 @@
+1.0
+===
+search https://dev.twitter.com/docs/api/1.1/get/search/tweets
+document it
+utf8 search
+extra params in search: test it,
+refactor get_search_cache_key
+
 1.1
 ===
 remove max_url_length option
-search tag
 Get rid of ttp: display_url in url replace
 tox creates eggs in homedir
 python 3

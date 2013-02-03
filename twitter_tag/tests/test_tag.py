@@ -13,13 +13,11 @@ from django.core.cache import cache
 from django.template import Context, Template, TemplateSyntaxError
 from httpretty import httprettified, HTTPretty
 
-from twitter_tag.utils import get_cache_key
+from twitter_tag.utils import get_user_cache_key
 
 
-@patch.multiple(settings, TWITTER_OAUTH_TOKEN='foo', TWITTER_OAUTH_SECRET='bar',
-                          TWITTER_CONSUMER_KEY='baz', TWITTER_CONSUMER_SECRET='Alice', create=True)
-class UsernameTag(unittest.TestCase):
-    api_url = 'https://api.twitter.com/1.1/statuses/user_timeline.json'
+class TwitterTag(unittest.TestCase):
+    api_url = None
     logger_name = 'twitter_tag.templatetags.twitter_tag'
 
     @httprettified
@@ -40,6 +38,12 @@ class UsernameTag(unittest.TestCase):
 
         HTTPretty.register_uri(HTTPretty.GET, self.api_url, responses=responses, content_type='application/json')
         return render_template(template=template)
+
+
+@patch.multiple(settings, TWITTER_OAUTH_TOKEN='foo', TWITTER_OAUTH_SECRET='bar',
+                TWITTER_CONSUMER_KEY='baz', TWITTER_CONSUMER_SECRET='Alice', create=True)
+class UsernameTag(TwitterTag):
+    api_url = 'https://api.twitter.com/1.1/statuses/user_timeline.json'
 
     def test_no_args(self):
         context = self.check_render(
@@ -116,7 +120,7 @@ class UsernameTag(unittest.TestCase):
 
         # it should be ok by now
         output, context = render_template("""{% get_tweets for "jresig" as tweets %}""")
-        cache_key = get_cache_key('jresig', 'tweets')
+        cache_key = get_user_cache_key('jresig', 'tweets')
         expect(cache.get(cache_key)).should.have.length_of(1)
         expect(context['tweets'][0]['text']).to.equal("This is not John Resig - you should be following @jeresig instead!!!")
 
@@ -175,6 +179,19 @@ class UsernameTag(unittest.TestCase):
         tweet = context['tweets'][0]
         expect(tweet['html']).to.contain('http://t.co/aVQRnBKP')
         expect(tweet['html']).to.contain('http://t.co/7KgHV8iI')
+
+
+@patch.multiple(settings, TWITTER_OAUTH_TOKEN='foo', TWITTER_OAUTH_SECRET='bar',
+                TWITTER_CONSUMER_KEY='baz', TWITTER_CONSUMER_SECRET='Alice', create=True)
+class SearchTag(TwitterTag):
+    api_url = 'https://api.twitter.com/1.1/search/tweets.json'
+
+    def test_search(self):
+        self.check_render(
+            template="""{% search_tweets for "python 3" as tweets %}""",
+            json_mock='coagulant.json',
+            expected_kwargs={'q': ['python 3']},
+        )
 
 
 def render_template(template):

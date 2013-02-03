@@ -2,6 +2,8 @@
 =====
 * Twitter API 1.1 based on twitter library
 * Release in not BACKWARDS INCOMPATIBLE, oauth settings are now required
+* Added twitter search templatetag
+* Added native datetime object to tweet attributes
 * max_url_length is deprecated
 * Rewritten code + tests
 * Cache key is memcache-friendly
