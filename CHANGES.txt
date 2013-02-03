@@ -1,33 +1,42 @@
-0.4.0dev
+1.0.0
+=====
+* Twitter API 1.1 based on twitter library
+* Release in not BACKWARDS INCOMPATIBLE, oauth settings are now required
+* max_url_length is deprecated
+* Rewritten code + tests
+* Cache key is memcache-friendly
 
+0.4.0
+=====
 * Fixed tweet truncation for retweets
 * Added url expansion in tweets
 * Added tox and travis support
 * Support for cyrillic hashtags
+* Dropped python 2.5, django 1.2 support
 
 0.3.1
-
+=====
 * Fixed URLError exception handling
 * Added python 2.5 support
 * Added django 1.2 support
 
 0.3
-
+===
 * Not raising Exception inside tempate tag in development mode
 * Cache last successful API call to make sure we are not serving empty tag
 * Added runtests.py
 * Moved repo and fixed url in setup.py
 
 0.2.1
-
+=====
 * Fixed MANIFEST.in
 
 0.2.0
-
+=====
 * Renamed template tag library and template tag
 * Added documentation
 * Added twitter api exception handling
 
 0.1.0
-
+=====
 * Initial release

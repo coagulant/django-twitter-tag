@@ -1,0 +1,7 @@
+1.1
+===
+remove max_url_length option
+search tag
+Get rid of ttp: display_url in url replace
+tox creates eggs in homedir
+python 3

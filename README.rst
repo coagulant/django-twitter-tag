@@ -2,43 +2,26 @@ Django Twitter Tag
 ==================
 
 .. image:: https://secure.travis-ci.org/coagulant/django-twitter-tag.png?branch=dev
+    :target: https://travis-ci.org/coagulant/django-twitter-tag
 
 A django template tag to display user's recent tweets.
+Version 1.0 uses Twitter API 1.1.
 
-You can limit number of tweets, filter out replies and retweets.
-Since the app exposes python-twitter_ ``Status`` model to template context,
-you can also access any tweet attributes or methods for your needs.
-You don't need to parse tweets to make urls, hashtags or twitter usernames clickable, it has been done for you already.
-Just use tweet's ``html`` attrubute (see example below).
-
-.. _python-twitter: http://python-twitter.googlecode.com/hg/doc/twitter.html
-
-Installation
-------------
-
-This app works with python 2.6 and higher, Django 1.3 and higher.
-
-Recommended way to install is pip::
-
-  pip install django-twitter-tag
-
+Basic features are limiting numbers of displayed tweets, filtering out replies and retweets.
+Library exposes each tweet ``json`` in template, adding extra attribute: ``html``.
+It makes urls, hashtags or twitter usernames clickable, juts like you expect them to be.
+Urs are expanded by default. Library handles twitter exceptions gracefully,
+returning last successful response.
 
 Usage
 -----
-
-* Add ``twitter_tag`` to ``INSTALLED_APPS`` in settings.py::
-
-    INSTALLED_APPS = (...
-                      'twitter_tag',
-                      ...
-                     )
 
 * Load tag in your template like this::
 
     {% load twitter_tag %}
 
 
-* Get user's (futurecolors in example) most recent tweets and store them in ``tweets`` variable::
+* Get user's (``futurecolors`` in example) most recent tweets and store them in ``tweets`` variable::
 
     {% get_tweets for "futurecolors" as tweets %}
 
@@ -51,18 +34,70 @@ Usage
     {% endfor %}
     </ul>
 
+See how it looks like `on our site`_.
+
+.. _on our site:http://futurecolors.ru/
+
+
+Installation
+------------
+
+This app works with python 2.6-2.7, Django 1.3-1.5b2.
+Python 3 support is planned in next releases.
+
+Recommended way to install is pip::
+
+  pip install django-twitter-tag
+
+
+* Add ``twitter_tag`` to ``INSTALLED_APPS`` in settings.py::
+
+    INSTALLED_APPS = (...
+                      'twitter_tag',
+                      ...
+                     )
+
+Configuration
+-------------
+
+Twitter `API 1.1`_ requires authentication for every request you make,
+so you have to provide some credentials for oauth dance to work.
+First, `create an application`_, second, request access token on newly created
+app page. The `process of obtaining a token`_ is explained in detail in docs.
+
+Here is an example of how your config might look like::
+
+    # settings.py
+    # Make sure to replace with out own, there values are made up
+
+    # Your access token: Access token
+    TWITTER_OAUTH_TOKEN = '91570701-BQMM5Ix9AJUC5JtM5Ix9DtwNAiaaYIYGN2CyPgduPVZKSX'
+    # Your access token: Access token secret
+    TWITTER_OAUTH_SECRET = 'hi1UiXm8rF4essN3HlaqMz7GoUvy3e4DsVkBAVsg4M'
+    # OAuth settings: Consumer key
+    TWITTER_CONSUMER_KEY = '3edIOec4uu00IGFxvQcwJe'
+    # OAuth settings: Consumer secret
+    TWITTER_CONSUMER_SECRET = 'YBD6GyFpvumNbNA218RAphszFnkifxR8K9h8Rdtq1A'
+
+For best performance you should set up `django cache framework`_. Cache is used both internally
+to store last successful json response and externally (see Caching below).
+
+.. _API 1.1:
+.. _create an application:https://dev.twitter.com/apps
+.. _process of obtaining a token:https://dev.twitter.com/docs/auth/tokens-devtwittercom
+.. _django cache framework:https://docs.djangoproject.com/en/dev/topics/cache/
 
 Examples
 --------
 
-You can specify number of tweets to get::
+You can specify number of tweets to show::
 
-    {% get_tweets for "futurecolors" as tweets exclude "replies" limit 10 %}
+    {% get_tweets for "futurecolors" as tweets limit 10 %}
 
 
 To filter out tweet replies (that start with @ char)::
 
-    {% get_tweets for "futurecolors" as tweets exclude "replies" limit 10 %}
+    {% get_tweets for "futurecolors" as tweets exclude "replies" %}
 
 
 To ignore native retweets::
@@ -70,22 +105,25 @@ To ignore native retweets::
     {% get_tweets for "futurecolors" as tweets exclude "retweets" %}
 
 
-To disable short urls expansion::
+Or everything from above together::
 
-    {% get_tweets for "futurecolors" as tweets max_url_length 0 %}
+    {% get_tweets for "futurecolors" as tweets exclude "replies, retweets" limit 10 %}
+
 
 Caching
 -------
 
 It's strongly advised to use template caching framework to reduce the amount of twitter API calls
-and avoid reaching possible request limit::
+and avoid reaching `rate limit`_ (currently, 180 reqs in 15 minutes)::
 
     {% load twitter_tag cache %}
-    {% cache 3600 my_tweets %}
+    {% cache 60 my_tweets %}
     {% get_tweets for "futurecolors" as tweets exclude "retweets" %}
     ...
     {% endcache %}
 
+
+.. _rate limit:https://dev.twitter.com/docs/rate-limiting/1.1
 
 Extra
 -----
@@ -93,35 +131,31 @@ Extra
 Tweet's properties
 ~~~~~~~~~~~~~~~~~~
 
-get_tweets holds a list of ``Status`` objects, which represet single user tweet.
-According to python-twitter_ API, every status has following attributes, availiable in templates::
+get_tweets returns a list of tweets into context. Each tweets is a json dict, that has
+exactly the same attrubutes, as stated in API 1.1 docs, describing `tweet json`_.
 
-  status.created_at
-  status.created_at_in_seconds
-  status.favorited
-  status.in_reply_to_screen_name
-  status.in_reply_to_user_id
-  status.in_reply_to_status_id
-  status.truncated
-  status.source
-  status.id
-  status.text
-  status.location
-  status.relative_created_at
-  status.user
-  status.urls
-  status.user_mentions
-  status.hashtags
-
+.. _tweet json:https://dev.twitter.com/docs/platform-objects/tweets
 
 Tweet's html
 ~~~~~~~~~~~~
 
-Tweet also has extra ``status.html`` property, which contains tweet, formatted for html output
-with all needed links.
+Tweet also has extra ``html`` property, which contains tweet, formatted for html output
+with all needed links. Note, Twitter has `guidelines for developers`_ on how embeded tweets
+should look like.
 
+.. _guidelines for developers:https://dev.twitter.com/terms/display-requirements
 
 Exception handling
 ~~~~~~~~~~~~~~~~~~
 
 Any Twitter API exceptions like 'Over capacity' are silenced and logged.
+Django cache is used internally to store last successful response in case `twitter is down`_.
+
+.. _twitter is down:https://dev.twitter.com/docs/error-codes-responses
+
+Tests
+-----
+
+Run::
+
+    python setup.py test
