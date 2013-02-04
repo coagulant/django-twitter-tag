@@ -181,6 +181,10 @@ class UsernameTag(TwitterTag):
         expect(tweet['html']).to.contain('http://t.co/7KgHV8iI')
 
 
+def test_settings():
+    render_template.when.called_with('{% get_tweets for "futurecolors" as tweets %}').should.throw(AttributeError)
+
+
 @patch.multiple(settings, TWITTER_OAUTH_TOKEN='foo', TWITTER_OAUTH_SECRET='bar',
                 TWITTER_CONSUMER_KEY='baz', TWITTER_CONSUMER_SECRET='Alice', create=True)
 class SearchTag(TwitterTag):
