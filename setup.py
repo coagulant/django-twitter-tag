@@ -29,6 +29,7 @@ setup(
     install_requires=[
         "django-classy-tags==0.4",
         "twitter==1.9.1",
+        "django-appconf==0.6",
         "twitter-text-python==1.0"
     ],
     tests_require=tests_require,

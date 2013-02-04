@@ -5,7 +5,6 @@ import logging
 from django import template
 from django.conf import settings
 from django.core.cache import cache
-from django.core.exceptions import ImproperlyConfigured
 
 from twitter import Twitter, OAuth, TwitterError
 from classytags.core import Tag, Options
@@ -15,10 +14,6 @@ from ..utils import expand_tweet_urls, urlize_twitter_text, get_user_cache_key, 
 
 
 register = template.Library()
-OAUTH_TOKEN = getattr(settings, 'TWITTER_OAUTH_TOKEN', None)
-OAUTH_SECRET = getattr(settings, 'TWITTER_OAUTH_SECRET', None)
-CONSUMER_KEY = getattr(settings, 'TWITTER_CONSUMER_KEY', None)
-CONSUMER_SECRET = getattr(settings, 'TWITTER_CONSUMER_SECRET', None)
 
 
 class BaseTwitterTag(Tag):
@@ -46,9 +41,10 @@ class BaseTwitterTag(Tag):
         max_url_length = 60 if kwargs['max_url_length'] is None else kwargs['max_url_length']
 
         try:
-            if not all([OAUTH_TOKEN, OAUTH_SECRET, CONSUMER_KEY, CONSUMER_SECRET]):
-                raise ImproperlyConfigured('Missing settings key')
-            twitter = Twitter(auth=OAuth(OAUTH_TOKEN, OAUTH_SECRET, CONSUMER_KEY, CONSUMER_SECRET))
+            twitter = Twitter(auth=OAuth(settings.TWITTER_OAUTH_TOKEN,
+                                         settings.TWITTER_OAUTH_SECRET,
+                                         settings.TWITTER_CONSUMER_KEY,
+                                         settings.TWITTER_CONSUMER_SECRET))
             json = self.get_json(twitter, **self.get_api_call_params(**kwargs))
         except TwitterError as e:
             logging.getLogger(__name__).error(str(e))
