@@ -157,6 +157,13 @@ Django cache is used internally to store last successful response in case `twitt
 
 .. _twitter is down: https://dev.twitter.com/docs/error-codes-responses
 
+Development
+-----------
+
+To install `development version`_, use ``pip install django-twitter-tag==dev``
+
+.. _development version: https://github.com/coagulant/django-twitter-tag/archive/dev.tar.gz#egg=django_twitter_tag-dev
+
 Tests
 -----
 
