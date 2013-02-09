@@ -198,6 +198,14 @@ class SearchTag(TwitterTag):
             length=15
         )
 
+    def test_custom_args(self):
+        self.check_render(
+            template="""{% search_tweets for "python 3" as tweets lang='eu' result_type='popular' %}""",
+            json_mock='python3.json',
+            expected_kwargs={'q': ['python 3'], 'lang': ['eu'], 'result_type': ['popular']},
+            length=15
+        )
+
 
 def render_template(template):
     context = Context()

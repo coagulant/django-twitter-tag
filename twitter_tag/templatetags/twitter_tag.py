@@ -111,7 +111,7 @@ class SearchTag(BaseTwitterTag):
     options = Options(
         'for', Argument('q'),
         'as', Argument('asvar', resolve=False),
-        MultiKeywordArgument('args', required=False),
+        MultiKeywordArgument('options', required=False),
         'max_url_length', Argument('max_url_length', required=False),
         'limit', Argument('limit', required=False),
     )
@@ -121,6 +121,7 @@ class SearchTag(BaseTwitterTag):
 
     def get_api_call_params(self, **kwargs):
         params = {'q': kwargs['q']}
+        params.update(kwargs['options'])
         return params
 
     def get_json(self, twitter, **kwargs):

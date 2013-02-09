@@ -4,7 +4,7 @@ Django Twitter Tag
 .. image:: https://secure.travis-ci.org/coagulant/django-twitter-tag.png?branch=dev
     :target: https://travis-ci.org/coagulant/django-twitter-tag
 
-A django template tag to display user's recent tweets.
+A django template tag to display user's recent tweets / search results.
 Version 1.0 uses Twitter API 1.1.
 
 Basic features are limiting numbers of displayed tweets, filtering out replies and retweets.
@@ -110,6 +110,21 @@ Or everything from above together::
 
     {% get_tweets for "futurecolors" as tweets exclude "replies, retweets" limit 10 %}
 
+
+Search tag (experimental)
+-------------------------
+
+You can search for tweets::
+
+    {% search_tweets for "python 3" as tweets limit 5 %}
+
+Search api arguments are supported via key=value pairs::
+
+    {% search_tweets for "python 3" as tweets lang='eu' result_type='popular' %}
+
+Relevant `API docs for search`_.
+
+.. _API docs for search: https://dev.twitter.com/docs/api/1.1/get/search/tweets
 
 Caching
 -------
