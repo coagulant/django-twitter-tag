@@ -193,8 +193,9 @@ class SearchTag(TwitterTag):
     def test_search(self):
         self.check_render(
             template="""{% search_tweets for "python 3" as tweets %}""",
-            json_mock='coagulant.json',
+            json_mock='python3.json',
             expected_kwargs={'q': ['python 3']},
+            length=15
         )
 
 
@@ -219,4 +220,4 @@ def clear_query_dict(query):
 
 
 def get_json(somefile):
-    return open(os.path.join('twitter_tag', 'tests', somefile)).read()
+    return open(os.path.join('tests', 'json', somefile)).read()

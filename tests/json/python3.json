@@ -1,0 +1,1591 @@
+{
+    "statuses": [
+        {
+            "metadata": {
+                "result_type": "recent",
+                "iso_language_code": "en"
+            },
+            "created_at": "Sat Feb 09 20:55:48 +0000 2013",
+            "id": 300347289904488450,
+            "id_str": "300347289904488452",
+            "text": "couchdbkit 0.6.4 is out, use latest http-parser and some fixes https://t.co/zJFgthaC Enjoy! #python #CouchDB",
+            "source": "<a href=\"http://itunes.apple.com/us/app/twitter/id409789998?mt=12\" rel=\"nofollow\">Twitter for Mac</a>",
+            "truncated": false,
+            "in_reply_to_status_id": null,
+            "in_reply_to_status_id_str": null,
+            "in_reply_to_user_id": null,
+            "in_reply_to_user_id_str": null,
+            "in_reply_to_screen_name": null,
+            "user": {
+                "id": 770056,
+                "id_str": "770056",
+                "name": "benoît chesneau",
+                "screen_name": "benoitc",
+                "location": "49.1924, 2.4649",
+                "description": "web craftsman",
+                "url": "http://benoitc.im",
+                "entities": {
+                    "url": {
+                        "urls": [
+                            {
+                                "url": "http://benoitc.im",
+                                "expanded_url": null,
+                                "indices": [
+                                    0,
+                                    17
+                                ]
+                            }
+                        ]
+                    },
+                    "description": {
+                        "urls": []
+                    }
+                },
+                "protected": false,
+                "followers_count": 1440,
+                "friends_count": 496,
+                "listed_count": 170,
+                "created_at": "Tue Feb 13 16:53:37 +0000 2007",
+                "favourites_count": 46,
+                "utc_offset": 3600,
+                "time_zone": "Paris",
+                "geo_enabled": true,
+                "verified": false,
+                "statuses_count": 14568,
+                "lang": "en",
+                "contributors_enabled": false,
+                "is_translator": false,
+                "profile_background_color": "3D3E3E",
+                "profile_background_image_url": "http://a0.twimg.com/profile_background_images/2970539/background3.jpg",
+                "profile_background_image_url_https": "https://si0.twimg.com/profile_background_images/2970539/background3.jpg",
+                "profile_background_tile": false,
+                "profile_image_url": "http://a0.twimg.com/profile_images/76299981/avatar100x100_normal.png",
+                "profile_image_url_https": "https://si0.twimg.com/profile_images/76299981/avatar100x100_normal.png",
+                "profile_link_color": "9BAABB",
+                "profile_sidebar_border_color": "9E9E9E",
+                "profile_sidebar_fill_color": "1F1F1F",
+                "profile_text_color": "968D8D",
+                "profile_use_background_image": false,
+                "default_profile": false,
+                "default_profile_image": false,
+                "following": null,
+                "follow_request_sent": null,
+                "notifications": null
+            },
+            "geo": null,
+            "coordinates": null,
+            "place": null,
+            "contributors": null,
+            "retweet_count": 0,
+            "entities": {
+                "hashtags": [
+                    {
+                        "text": "python",
+                        "indices": [
+                            92,
+                            99
+                        ]
+                    },
+                    {
+                        "text": "CouchDB",
+                        "indices": [
+                            100,
+                            108
+                        ]
+                    }
+                ],
+                "urls": [
+                    {
+                        "url": "https://t.co/zJFgthaC",
+                        "expanded_url": "https://github.com/benoitc/couchdbkit/compare/0.6.3...0.6.4",
+                        "display_url": "github.com/benoitc/couchd…",
+                        "indices": [
+                            63,
+                            84
+                        ]
+                    }
+                ],
+                "user_mentions": []
+            },
+            "favorited": false,
+            "retweeted": false,
+            "possibly_sensitive": false
+        },
+        {
+            "metadata": {
+                "result_type": "recent",
+                "iso_language_code": "en"
+            },
+            "created_at": "Sat Feb 09 20:54:55 +0000 2013",
+            "id": 300347067711225860,
+            "id_str": "300347067711225856",
+            "text": "cloudmesh 0.3.1: Cloud Mesh: managing multiple virtual machines in Clouds http://t.co/nkUnRVub",
+            "source": "<a href=\"http://twitterfeed.com\" rel=\"nofollow\">twitterfeed</a>",
+            "truncated": false,
+            "in_reply_to_status_id": null,
+            "in_reply_to_status_id_str": null,
+            "in_reply_to_user_id": null,
+            "in_reply_to_user_id_str": null,
+            "in_reply_to_screen_name": null,
+            "user": {
+                "id": 24514487,
+                "id_str": "24514487",
+                "name": "Python Package Index",
+                "screen_name": "pypi",
+                "location": "",
+                "description": "",
+                "url": null,
+                "entities": {
+                    "description": {
+                        "urls": []
+                    }
+                },
+                "protected": false,
+                "followers_count": 4012,
+                "friends_count": 238,
+                "listed_count": 528,
+                "created_at": "Sun Mar 15 12:07:44 +0000 2009",
+                "favourites_count": 0,
+                "utc_offset": null,
+                "time_zone": null,
+                "geo_enabled": false,
+                "verified": false,
+                "statuses_count": 103017,
+                "lang": "en",
+                "contributors_enabled": false,
+                "is_translator": false,
+                "profile_background_color": "C0DEED",
+                "profile_background_image_url": "http://a0.twimg.com/images/themes/theme1/bg.png",
+                "profile_background_image_url_https": "https://si0.twimg.com/images/themes/theme1/bg.png",
+                "profile_background_tile": false,
+                "profile_image_url": "http://a0.twimg.com/profile_images/104712585/pypi_twitter_normal.jpg",
+                "profile_image_url_https": "https://si0.twimg.com/profile_images/104712585/pypi_twitter_normal.jpg",
+                "profile_link_color": "0084B4",
+                "profile_sidebar_border_color": "C0DEED",
+                "profile_sidebar_fill_color": "DDEEF6",
+                "profile_text_color": "333333",
+                "profile_use_background_image": true,
+                "default_profile": true,
+                "default_profile_image": false,
+                "following": null,
+                "follow_request_sent": null,
+                "notifications": null
+            },
+            "geo": null,
+            "coordinates": null,
+            "place": null,
+            "contributors": null,
+            "retweet_count": 0,
+            "entities": {
+                "hashtags": [],
+                "urls": [
+                    {
+                        "url": "http://t.co/nkUnRVub",
+                        "expanded_url": "http://bit.ly/12dEq9r",
+                        "display_url": "bit.ly/12dEq9r",
+                        "indices": [
+                            74,
+                            94
+                        ]
+                    }
+                ],
+                "user_mentions": []
+            },
+            "favorited": false,
+            "retweeted": false,
+            "possibly_sensitive": false
+        },
+        {
+            "metadata": {
+                "result_type": "recent",
+                "iso_language_code": "en"
+            },
+            "created_at": "Sat Feb 09 20:21:52 +0000 2013",
+            "id": 300338748531540000,
+            "id_str": "300338748531539969",
+            "text": "Webapp security hazard in python 3.3's os.path:\n&gt;&gt;&gt; user_request = \"/usr/bin\"\n&gt;&gt;&gt; os.path.join(\"safe_dir\", \"user_request\")\n\"/usr/bin\"",
+            "source": "<a href=\"http://hotot.org\" rel=\"nofollow\">Hotot</a>",
+            "truncated": false,
+            "in_reply_to_status_id": null,
+            "in_reply_to_status_id_str": null,
+            "in_reply_to_user_id": null,
+            "in_reply_to_user_id_str": null,
+            "in_reply_to_screen_name": null,
+            "user": {
+                "id": 16066596,
+                "id_str": "16066596",
+                "name": "Cathal Garvey",
+                "screen_name": "onetruecathal",
+                "location": "Cork, Ireland",
+                "description": "Synthetic Biologist, Geneticist, DIYbio Experimenter & Enabler, Crypto-enthusiast, Vegetarian, Environmentalist,@sciencegallery Leonardo, Loving Husband & Dad.",
+                "url": "http://www.indiebiotech.com",
+                "entities": {
+                    "url": {
+                        "urls": [
+                            {
+                                "url": "http://www.indiebiotech.com",
+                                "expanded_url": null,
+                                "indices": [
+                                    0,
+                                    27
+                                ]
+                            }
+                        ]
+                    },
+                    "description": {
+                        "urls": []
+                    }
+                },
+                "protected": false,
+                "followers_count": 1366,
+                "friends_count": 378,
+                "listed_count": 92,
+                "created_at": "Sun Aug 31 13:59:11 +0000 2008",
+                "favourites_count": 12,
+                "utc_offset": 0,
+                "time_zone": "Dublin",
+                "geo_enabled": false,
+                "verified": false,
+                "statuses_count": 19661,
+                "lang": "en",
+                "contributors_enabled": false,
+                "is_translator": false,
+                "profile_background_color": "8B542B",
+                "profile_background_image_url": "http://a0.twimg.com/images/themes/theme8/bg.gif",
+                "profile_background_image_url_https": "https://si0.twimg.com/images/themes/theme8/bg.gif",
+                "profile_background_tile": false,
+                "profile_image_url": "http://a0.twimg.com/profile_images/1319939950/IMAG0041b_normal.jpg",
+                "profile_image_url_https": "https://si0.twimg.com/profile_images/1319939950/IMAG0041b_normal.jpg",
+                "profile_link_color": "9D582E",
+                "profile_sidebar_border_color": "D9B17E",
+                "profile_sidebar_fill_color": "EADEAA",
+                "profile_text_color": "333333",
+                "profile_use_background_image": true,
+                "default_profile": false,
+                "default_profile_image": false,
+                "following": null,
+                "follow_request_sent": null,
+                "notifications": null
+            },
+            "geo": null,
+            "coordinates": null,
+            "place": null,
+            "contributors": null,
+            "retweet_count": 0,
+            "entities": {
+                "hashtags": [],
+                "urls": [],
+                "user_mentions": []
+            },
+            "favorited": false,
+            "retweeted": false
+        },
+        {
+            "metadata": {
+                "result_type": "recent",
+                "iso_language_code": "en"
+            },
+            "created_at": "Sat Feb 09 19:56:53 +0000 2013",
+            "id": 300332462960164860,
+            "id_str": "300332462960164864",
+            "text": "@JODYHiGHROLLER followed me. Im bout to clear 3 lines of coke and sing versace python",
+            "source": "<a href=\"http://twitter.com/download/android\" rel=\"nofollow\">Twitter for Android</a>",
+            "truncated": false,
+            "in_reply_to_status_id": null,
+            "in_reply_to_status_id_str": null,
+            "in_reply_to_user_id": 29166305,
+            "in_reply_to_user_id_str": "29166305",
+            "in_reply_to_screen_name": "JODYHiGHROLLER",
+            "user": {
+                "id": 388430747,
+                "id_str": "388430747",
+                "name": "Joe russo",
+                "screen_name": "JoeyRuss31",
+                "location": "Hegewisch ",
+                "description": "",
+                "url": null,
+                "entities": {
+                    "description": {
+                        "urls": []
+                    }
+                },
+                "protected": false,
+                "followers_count": 84,
+                "friends_count": 117,
+                "listed_count": 0,
+                "created_at": "Mon Oct 10 18:46:34 +0000 2011",
+                "favourites_count": 45,
+                "utc_offset": null,
+                "time_zone": null,
+                "geo_enabled": false,
+                "verified": false,
+                "statuses_count": 5081,
+                "lang": "en",
+                "contributors_enabled": false,
+                "is_translator": false,
+                "profile_background_color": "C0DEED",
+                "profile_background_image_url": "http://a0.twimg.com/images/themes/theme1/bg.png",
+                "profile_background_image_url_https": "https://si0.twimg.com/images/themes/theme1/bg.png",
+                "profile_background_tile": false,
+                "profile_image_url": "http://a0.twimg.com/profile_images/2306706917/4ul8d1vp_normal",
+                "profile_image_url_https": "https://si0.twimg.com/profile_images/2306706917/4ul8d1vp_normal",
+                "profile_link_color": "0084B4",
+                "profile_sidebar_border_color": "C0DEED",
+                "profile_sidebar_fill_color": "DDEEF6",
+                "profile_text_color": "333333",
+                "profile_use_background_image": true,
+                "default_profile": true,
+                "default_profile_image": false,
+                "following": null,
+                "follow_request_sent": null,
+                "notifications": null
+            },
+            "geo": null,
+            "coordinates": null,
+            "place": null,
+            "contributors": null,
+            "retweet_count": 0,
+            "entities": {
+                "hashtags": [],
+                "urls": [],
+                "user_mentions": [
+                    {
+                        "screen_name": "JODYHiGHROLLER",
+                        "name": "ULTRA ViOLET PiRATE",
+                        "id": 29166305,
+                        "id_str": "29166305",
+                        "indices": [
+                            0,
+                            15
+                        ]
+                    }
+                ]
+            },
+            "favorited": false,
+            "retweeted": false
+        },
+        {
+            "metadata": {
+                "result_type": "recent",
+                "iso_language_code": "en"
+            },
+            "created_at": "Sat Feb 09 19:43:02 +0000 2013",
+            "id": 300328978403688450,
+            "id_str": "300328978403688448",
+            "text": "Do Unicode strings in Python 3 still depend on \"narrow\" / \"wide\" builds? http://t.co/RRqN8fu7",
+            "source": "<a href=\"http://pythonatso.appspot.com/\" rel=\"nofollow\">@PythonAtSO</a>",
+            "truncated": false,
+            "in_reply_to_status_id": null,
+            "in_reply_to_status_id_str": null,
+            "in_reply_to_user_id": null,
+            "in_reply_to_user_id_str": null,
+            "in_reply_to_screen_name": null,
+            "user": {
+                "id": 244462999,
+                "id_str": "244462999",
+                "name": "PythonAtSO",
+                "screen_name": "pythonatso",
+                "location": "Hong Kong",
+                "description": "Live stream of Python questions at StackOverflow",
+                "url": "http://stackoverflow.com/questions/tagged/python",
+                "entities": {
+                    "url": {
+                        "urls": [
+                            {
+                                "url": "http://stackoverflow.com/questions/tagged/python",
+                                "expanded_url": null,
+                                "indices": [
+                                    0,
+                                    48
+                                ]
+                            }
+                        ]
+                    },
+                    "description": {
+                        "urls": []
+                    }
+                },
+                "protected": false,
+                "followers_count": 353,
+                "friends_count": 3,
+                "listed_count": 47,
+                "created_at": "Sat Jan 29 10:59:26 +0000 2011",
+                "favourites_count": 2,
+                "utc_offset": 28800,
+                "time_zone": "Hong Kong",
+                "geo_enabled": false,
+                "verified": false,
+                "statuses_count": 62401,
+                "lang": "en",
+                "contributors_enabled": false,
+                "is_translator": false,
+                "profile_background_color": "C0DEED",
+                "profile_background_image_url": "http://a0.twimg.com/images/themes/theme1/bg.png",
+                "profile_background_image_url_https": "https://si0.twimg.com/images/themes/theme1/bg.png",
+                "profile_background_tile": false,
+                "profile_image_url": "http://a0.twimg.com/profile_images/1228917593/Screen_shot_2011-01-29_at_7.25.02_PM_normal.png",
+                "profile_image_url_https": "https://si0.twimg.com/profile_images/1228917593/Screen_shot_2011-01-29_at_7.25.02_PM_normal.png",
+                "profile_link_color": "0084B4",
+                "profile_sidebar_border_color": "C0DEED",
+                "profile_sidebar_fill_color": "DDEEF6",
+                "profile_text_color": "333333",
+                "profile_use_background_image": true,
+                "default_profile": true,
+                "default_profile_image": false,
+                "following": null,
+                "follow_request_sent": null,
+                "notifications": null
+            },
+            "geo": null,
+            "coordinates": null,
+            "place": null,
+            "contributors": null,
+            "retweet_count": 0,
+            "entities": {
+                "hashtags": [],
+                "urls": [
+                    {
+                        "url": "http://t.co/RRqN8fu7",
+                        "expanded_url": "http://bit.ly/14K2bsY",
+                        "display_url": "bit.ly/14K2bsY",
+                        "indices": [
+                            73,
+                            93
+                        ]
+                    }
+                ],
+                "user_mentions": []
+            },
+            "favorited": false,
+            "retweeted": false,
+            "possibly_sensitive": false
+        },
+        {
+            "metadata": {
+                "result_type": "recent",
+                "iso_language_code": "en"
+            },
+            "created_at": "Sat Feb 09 19:42:05 +0000 2013",
+            "id": 300328735914225660,
+            "id_str": "300328735914225664",
+            "text": "#Python #3.x # http://t.co/ugTDxDTC Python classes that create each others class objects [duplicate]",
+            "source": "<a href=\"http://www.zqna.net/\" rel=\"nofollow\">zqna</a>",
+            "truncated": false,
+            "in_reply_to_status_id": null,
+            "in_reply_to_status_id_str": null,
+            "in_reply_to_user_id": null,
+            "in_reply_to_user_id_str": null,
+            "in_reply_to_screen_name": null,
+            "user": {
+                "id": 1081578536,
+                "id_str": "1081578536",
+                "name": "zqna",
+                "screen_name": "zqnaex",
+                "location": "Dallas",
+                "description": "The Z qna application",
+                "url": "http://t.co/RJUlo2et",
+                "entities": {
+                    "url": {
+                        "urls": [
+                            {
+                                "url": "http://t.co/RJUlo2et",
+                                "expanded_url": "http://www.zqna.net/",
+                                "display_url": "zqna.net",
+                                "indices": [
+                                    0,
+                                    20
+                                ]
+                            }
+                        ]
+                    },
+                    "description": {
+                        "urls": []
+                    }
+                },
+                "protected": false,
+                "followers_count": 22351,
+                "friends_count": 397,
+                "listed_count": 2,
+                "created_at": "Sat Jan 12 02:29:08 +0000 2013",
+                "favourites_count": 0,
+                "utc_offset": -21600,
+                "time_zone": "Central Time (US & Canada)",
+                "geo_enabled": false,
+                "verified": false,
+                "statuses_count": 15604,
+                "lang": "en",
+                "contributors_enabled": false,
+                "is_translator": false,
+                "profile_background_color": "858788",
+                "profile_background_image_url": "http://a0.twimg.com/images/themes/theme1/bg.png",
+                "profile_background_image_url_https": "https://si0.twimg.com/images/themes/theme1/bg.png",
+                "profile_background_tile": false,
+                "profile_image_url": "http://a0.twimg.com/profile_images/3096959994/687b33decd151f8ed5b7cca61c35b542_normal.png",
+                "profile_image_url_https": "https://si0.twimg.com/profile_images/3096959994/687b33decd151f8ed5b7cca61c35b542_normal.png",
+                "profile_banner_url": "https://si0.twimg.com/profile_banners/1081578536/1357957980",
+                "profile_link_color": "1122CC",
+                "profile_sidebar_border_color": "FFFFFF",
+                "profile_sidebar_fill_color": "DDEEF6",
+                "profile_text_color": "333333",
+                "profile_use_background_image": false,
+                "default_profile": false,
+                "default_profile_image": false,
+                "following": null,
+                "follow_request_sent": null,
+                "notifications": null
+            },
+            "geo": null,
+            "coordinates": null,
+            "place": null,
+            "contributors": null,
+            "retweet_count": 0,
+            "entities": {
+                "hashtags": [
+                    {
+                        "text": "Python",
+                        "indices": [
+                            0,
+                            7
+                        ]
+                    }
+                ],
+                "urls": [
+                    {
+                        "url": "http://t.co/ugTDxDTC",
+                        "expanded_url": "http://www.zqna.net/qna/iymxxn-python-classes-that-create-each-others-class-objects-duplicate.html",
+                        "display_url": "zqna.net/qna/iymxxn-pyt…",
+                        "indices": [
+                            15,
+                            35
+                        ]
+                    }
+                ],
+                "user_mentions": []
+            },
+            "favorited": false,
+            "retweeted": false,
+            "possibly_sensitive": false
+        },
+        {
+            "metadata": {
+                "result_type": "recent",
+                "iso_language_code": "en"
+            },
+            "created_at": "Sat Feb 09 19:36:02 +0000 2013",
+            "id": 300327212916293600,
+            "id_str": "300327212916293632",
+            "text": "Do Unicode strings in Python 3 still depend on \"narrow\" / \"wide\" builds? http://t.co/Qd3O0InW #python",
+            "source": "<a href=\"http://www.python-questions.net/\" rel=\"nofollow\">Python Questions</a>",
+            "truncated": false,
+            "in_reply_to_status_id": null,
+            "in_reply_to_status_id_str": null,
+            "in_reply_to_user_id": null,
+            "in_reply_to_user_id_str": null,
+            "in_reply_to_screen_name": null,
+            "user": {
+                "id": 451617602,
+                "id_str": "451617602",
+                "name": "Python Questions",
+                "screen_name": "PythonQuestions",
+                "location": "",
+                "description": "",
+                "url": "http://python-questions.net/",
+                "entities": {
+                    "url": {
+                        "urls": [
+                            {
+                                "url": "http://python-questions.net/",
+                                "expanded_url": null,
+                                "indices": [
+                                    0,
+                                    28
+                                ]
+                            }
+                        ]
+                    },
+                    "description": {
+                        "urls": []
+                    }
+                },
+                "protected": false,
+                "followers_count": 901,
+                "friends_count": 0,
+                "listed_count": 88,
+                "created_at": "Sat Dec 31 19:25:06 +0000 2011",
+                "favourites_count": 0,
+                "utc_offset": -21600,
+                "time_zone": "Central Time (US & Canada)",
+                "geo_enabled": false,
+                "verified": false,
+                "statuses_count": 76695,
+                "lang": "en",
+                "contributors_enabled": false,
+                "is_translator": false,
+                "profile_background_color": "C0DEED",
+                "profile_background_image_url": "http://a0.twimg.com/images/themes/theme1/bg.png",
+                "profile_background_image_url_https": "https://si0.twimg.com/images/themes/theme1/bg.png",
+                "profile_background_tile": false,
+                "profile_image_url": "http://a0.twimg.com/profile_images/1726067520/python_normal.png",
+                "profile_image_url_https": "https://si0.twimg.com/profile_images/1726067520/python_normal.png",
+                "profile_link_color": "0084B4",
+                "profile_sidebar_border_color": "C0DEED",
+                "profile_sidebar_fill_color": "DDEEF6",
+                "profile_text_color": "333333",
+                "profile_use_background_image": true,
+                "default_profile": true,
+                "default_profile_image": false,
+                "following": null,
+                "follow_request_sent": null,
+                "notifications": null
+            },
+            "geo": null,
+            "coordinates": null,
+            "place": null,
+            "contributors": null,
+            "retweet_count": 0,
+            "entities": {
+                "hashtags": [
+                    {
+                        "text": "python",
+                        "indices": [
+                            94,
+                            101
+                        ]
+                    }
+                ],
+                "urls": [
+                    {
+                        "url": "http://t.co/Qd3O0InW",
+                        "expanded_url": "http://pyq.io/so/14790708",
+                        "display_url": "pyq.io/so/14790708",
+                        "indices": [
+                            73,
+                            93
+                        ]
+                    }
+                ],
+                "user_mentions": []
+            },
+            "favorited": false,
+            "retweeted": false,
+            "possibly_sensitive": false
+        },
+        {
+            "metadata": {
+                "result_type": "recent",
+                "iso_language_code": "en"
+            },
+            "created_at": "Sat Feb 09 19:32:46 +0000 2013",
+            "id": 300326394494328800,
+            "id_str": "300326394494328834",
+            "text": "@Zendejas_3 jack's forearms are bigger so I gave him python",
+            "source": "<a href=\"http://twitter.com/download/iphone\" rel=\"nofollow\">Twitter for iPhone</a>",
+            "truncated": false,
+            "in_reply_to_status_id": 300323864796344300,
+            "in_reply_to_status_id_str": "300323864796344321",
+            "in_reply_to_user_id": 443509016,
+            "in_reply_to_user_id_str": "443509016",
+            "in_reply_to_screen_name": "Zendejas_3",
+            "user": {
+                "id": 929095160,
+                "id_str": "929095160",
+                "name": "Jake",
+                "screen_name": "mathaijake",
+                "location": "",
+                "description": "The Cobra™",
+                "url": null,
+                "entities": {
+                    "description": {
+                        "urls": []
+                    }
+                },
+                "protected": false,
+                "followers_count": 66,
+                "friends_count": 64,
+                "listed_count": 0,
+                "created_at": "Tue Nov 06 06:00:43 +0000 2012",
+                "favourites_count": 294,
+                "utc_offset": null,
+                "time_zone": null,
+                "geo_enabled": false,
+                "verified": false,
+                "statuses_count": 656,
+                "lang": "en",
+                "contributors_enabled": false,
+                "is_translator": false,
+                "profile_background_color": "C0DEED",
+                "profile_background_image_url": "http://a0.twimg.com/images/themes/theme1/bg.png",
+                "profile_background_image_url_https": "https://si0.twimg.com/images/themes/theme1/bg.png",
+                "profile_background_tile": false,
+                "profile_image_url": "http://a0.twimg.com/profile_images/3205632497/16ca73c24202a29307cfb26458e90635_normal.jpeg",
+                "profile_image_url_https": "https://si0.twimg.com/profile_images/3205632497/16ca73c24202a29307cfb26458e90635_normal.jpeg",
+                "profile_banner_url": "https://si0.twimg.com/profile_banners/929095160/1359959650",
+                "profile_link_color": "0084B4",
+                "profile_sidebar_border_color": "C0DEED",
+                "profile_sidebar_fill_color": "DDEEF6",
+                "profile_text_color": "333333",
+                "profile_use_background_image": true,
+                "default_profile": true,
+                "default_profile_image": false,
+                "following": null,
+                "follow_request_sent": null,
+                "notifications": null
+            },
+            "geo": null,
+            "coordinates": null,
+            "place": null,
+            "contributors": null,
+            "retweet_count": 0,
+            "entities": {
+                "hashtags": [],
+                "urls": [],
+                "user_mentions": [
+                    {
+                        "screen_name": "Zendejas_3",
+                        "name": "Mario Zendejas",
+                        "id": 443509016,
+                        "id_str": "443509016",
+                        "indices": [
+                            0,
+                            11
+                        ]
+                    }
+                ]
+            },
+            "favorited": false,
+            "retweeted": false
+        },
+        {
+            "metadata": {
+                "result_type": "recent",
+                "iso_language_code": "en"
+            },
+            "created_at": "Sat Feb 09 19:22:43 +0000 2013",
+            "id": 300323864796344300,
+            "id_str": "300323864796344321",
+            "text": "@mathaijake what about the python",
+            "source": "<a href=\"http://twitter.com/download/iphone\" rel=\"nofollow\">Twitter for iPhone</a>",
+            "truncated": false,
+            "in_reply_to_status_id": 300312657272123400,
+            "in_reply_to_status_id_str": "300312657272123392",
+            "in_reply_to_user_id": 929095160,
+            "in_reply_to_user_id_str": "929095160",
+            "in_reply_to_screen_name": "mathaijake",
+            "user": {
+                "id": 443509016,
+                "id_str": "443509016",
+                "name": "Mario Zendejas",
+                "screen_name": "Zendejas_3",
+                "location": "",
+                "description": "Just chasing my dream",
+                "url": null,
+                "entities": {
+                    "description": {
+                        "urls": []
+                    }
+                },
+                "protected": false,
+                "followers_count": 90,
+                "friends_count": 152,
+                "listed_count": 0,
+                "created_at": "Thu Dec 22 07:38:47 +0000 2011",
+                "favourites_count": 71,
+                "utc_offset": null,
+                "time_zone": null,
+                "geo_enabled": false,
+                "verified": false,
+                "statuses_count": 432,
+                "lang": "en",
+                "contributors_enabled": false,
+                "is_translator": false,
+                "profile_background_color": "C0DEED",
+                "profile_background_image_url": "http://a0.twimg.com/images/themes/theme1/bg.png",
+                "profile_background_image_url_https": "https://si0.twimg.com/images/themes/theme1/bg.png",
+                "profile_background_tile": false,
+                "profile_image_url": "http://a0.twimg.com/profile_images/3072095986/6861fbe85fad853386e8f926fdc231e0_normal.jpeg",
+                "profile_image_url_https": "https://si0.twimg.com/profile_images/3072095986/6861fbe85fad853386e8f926fdc231e0_normal.jpeg",
+                "profile_banner_url": "https://si0.twimg.com/profile_banners/443509016/1357455439",
+                "profile_link_color": "0084B4",
+                "profile_sidebar_border_color": "C0DEED",
+                "profile_sidebar_fill_color": "DDEEF6",
+                "profile_text_color": "333333",
+                "profile_use_background_image": true,
+                "default_profile": true,
+                "default_profile_image": false,
+                "following": null,
+                "follow_request_sent": null,
+                "notifications": null
+            },
+            "geo": null,
+            "coordinates": null,
+            "place": null,
+            "contributors": null,
+            "retweet_count": 0,
+            "entities": {
+                "hashtags": [],
+                "urls": [],
+                "user_mentions": [
+                    {
+                        "screen_name": "mathaijake",
+                        "name": "Jake",
+                        "id": 929095160,
+                        "id_str": "929095160",
+                        "indices": [
+                            0,
+                            11
+                        ]
+                    }
+                ]
+            },
+            "favorited": false,
+            "retweeted": false
+        },
+        {
+            "metadata": {
+                "result_type": "recent",
+                "iso_language_code": "en"
+            },
+            "created_at": "Sat Feb 09 19:15:14 +0000 2013",
+            "id": 300321980429770750,
+            "id_str": "300321980429770753",
+            "text": "INSPIRATION for Model #3 Miss Pink Lemonade #Shoes #Flats #Leather #Exotic #Python #Velvet  #Pink #Green… http://t.co/GkV2Aa34",
+            "source": "<a href=\"http://instagram.com\" rel=\"nofollow\">Instagram</a>",
+            "truncated": false,
+            "in_reply_to_status_id": null,
+            "in_reply_to_status_id_str": null,
+            "in_reply_to_user_id": null,
+            "in_reply_to_user_id_str": null,
+            "in_reply_to_screen_name": null,
+            "user": {
+                "id": 238677839,
+                "id_str": "238677839",
+                "name": "XiMuSA28",
+                "screen_name": "XiMuSa28",
+                "location": "",
+                "description": "Artist, Fashion & Int. Designer. Music, Design, Art & Culinary Lover. I will never be da woman with da perfect hair, who can wear white and not spill on it.",
+                "url": "http://www.bangbangtokillfor.com",
+                "entities": {
+                    "url": {
+                        "urls": [
+                            {
+                                "url": "http://www.bangbangtokillfor.com",
+                                "expanded_url": null,
+                                "indices": [
+                                    0,
+                                    32
+                                ]
+                            }
+                        ]
+                    },
+                    "description": {
+                        "urls": []
+                    }
+                },
+                "protected": false,
+                "followers_count": 394,
+                "friends_count": 321,
+                "listed_count": 1,
+                "created_at": "Sat Jan 15 19:22:30 +0000 2011",
+                "favourites_count": 1057,
+                "utc_offset": -25200,
+                "time_zone": "Mountain Time (US & Canada)",
+                "geo_enabled": true,
+                "verified": false,
+                "statuses_count": 8200,
+                "lang": "en",
+                "contributors_enabled": false,
+                "is_translator": false,
+                "profile_background_color": "F5F0F3",
+                "profile_background_image_url": "http://a0.twimg.com/profile_background_images/684858544/37bcc4b1503e34202bec0d57f37fd315.png",
+                "profile_background_image_url_https": "https://si0.twimg.com/profile_background_images/684858544/37bcc4b1503e34202bec0d57f37fd315.png",
+                "profile_background_tile": true,
+                "profile_image_url": "http://a0.twimg.com/profile_images/3204696540/5536e54f09397c508d465ad0f3da9a30_normal.jpeg",
+                "profile_image_url_https": "https://si0.twimg.com/profile_images/3204696540/5536e54f09397c508d465ad0f3da9a30_normal.jpeg",
+                "profile_link_color": "DE9FD0",
+                "profile_sidebar_border_color": "000000",
+                "profile_sidebar_fill_color": "8183C0",
+                "profile_text_color": "B28CC3",
+                "profile_use_background_image": true,
+                "default_profile": false,
+                "default_profile_image": false,
+                "following": null,
+                "follow_request_sent": null,
+                "notifications": null
+            },
+            "geo": null,
+            "coordinates": null,
+            "place": null,
+            "contributors": null,
+            "retweet_count": 0,
+            "entities": {
+                "hashtags": [
+                    {
+                        "text": "Shoes",
+                        "indices": [
+                            44,
+                            50
+                        ]
+                    },
+                    {
+                        "text": "Flats",
+                        "indices": [
+                            51,
+                            57
+                        ]
+                    },
+                    {
+                        "text": "Leather",
+                        "indices": [
+                            58,
+                            66
+                        ]
+                    },
+                    {
+                        "text": "Exotic",
+                        "indices": [
+                            67,
+                            74
+                        ]
+                    },
+                    {
+                        "text": "Python",
+                        "indices": [
+                            75,
+                            82
+                        ]
+                    },
+                    {
+                        "text": "Velvet",
+                        "indices": [
+                            83,
+                            90
+                        ]
+                    },
+                    {
+                        "text": "Pink",
+                        "indices": [
+                            92,
+                            97
+                        ]
+                    },
+                    {
+                        "text": "Green",
+                        "indices": [
+                            98,
+                            104
+                        ]
+                    }
+                ],
+                "urls": [
+                    {
+                        "url": "http://t.co/GkV2Aa34",
+                        "expanded_url": "http://instagr.am/p/VhYTUlDZHx/",
+                        "display_url": "instagr.am/p/VhYTUlDZHx/",
+                        "indices": [
+                            106,
+                            126
+                        ]
+                    }
+                ],
+                "user_mentions": []
+            },
+            "favorited": false,
+            "retweeted": false,
+            "possibly_sensitive": false
+        },
+        {
+            "metadata": {
+                "result_type": "recent",
+                "iso_language_code": "fr"
+            },
+            "created_at": "Sat Feb 09 19:08:08 +0000 2013",
+            "id": 300320194725818400,
+            "id_str": "300320194725818368",
+            "text": "automation 0.3.3.5: A Django-specific implementation of Fabric http://t.co/hPvlZwU1",
+            "source": "<a href=\"http://twitterfeed.com\" rel=\"nofollow\">twitterfeed</a>",
+            "truncated": false,
+            "in_reply_to_status_id": null,
+            "in_reply_to_status_id_str": null,
+            "in_reply_to_user_id": null,
+            "in_reply_to_user_id_str": null,
+            "in_reply_to_screen_name": null,
+            "user": {
+                "id": 24514487,
+                "id_str": "24514487",
+                "name": "Python Package Index",
+                "screen_name": "pypi",
+                "location": "",
+                "description": "",
+                "url": null,
+                "entities": {
+                    "description": {
+                        "urls": []
+                    }
+                },
+                "protected": false,
+                "followers_count": 4012,
+                "friends_count": 238,
+                "listed_count": 528,
+                "created_at": "Sun Mar 15 12:07:44 +0000 2009",
+                "favourites_count": 0,
+                "utc_offset": null,
+                "time_zone": null,
+                "geo_enabled": false,
+                "verified": false,
+                "statuses_count": 103017,
+                "lang": "en",
+                "contributors_enabled": false,
+                "is_translator": false,
+                "profile_background_color": "C0DEED",
+                "profile_background_image_url": "http://a0.twimg.com/images/themes/theme1/bg.png",
+                "profile_background_image_url_https": "https://si0.twimg.com/images/themes/theme1/bg.png",
+                "profile_background_tile": false,
+                "profile_image_url": "http://a0.twimg.com/profile_images/104712585/pypi_twitter_normal.jpg",
+                "profile_image_url_https": "https://si0.twimg.com/profile_images/104712585/pypi_twitter_normal.jpg",
+                "profile_link_color": "0084B4",
+                "profile_sidebar_border_color": "C0DEED",
+                "profile_sidebar_fill_color": "DDEEF6",
+                "profile_text_color": "333333",
+                "profile_use_background_image": true,
+                "default_profile": true,
+                "default_profile_image": false,
+                "following": null,
+                "follow_request_sent": null,
+                "notifications": null
+            },
+            "geo": null,
+            "coordinates": null,
+            "place": null,
+            "contributors": null,
+            "retweet_count": 0,
+            "entities": {
+                "hashtags": [],
+                "urls": [
+                    {
+                        "url": "http://t.co/hPvlZwU1",
+                        "expanded_url": "http://bit.ly/12dilI3",
+                        "display_url": "bit.ly/12dilI3",
+                        "indices": [
+                            63,
+                            83
+                        ]
+                    }
+                ],
+                "user_mentions": []
+            },
+            "favorited": false,
+            "retweeted": false,
+            "possibly_sensitive": false
+        },
+        {
+            "metadata": {
+                "result_type": "recent",
+                "iso_language_code": "en"
+            },
+            "created_at": "Sat Feb 09 18:59:21 +0000 2013",
+            "id": 300317984554119200,
+            "id_str": "300317984554119168",
+            "text": "@nzepko69me 88's, Python Kobe, Iman Shumpert Top 10 2000, Nike Fusion Tr 3, Nerf KD",
+            "source": "<a href=\"http://twitter.com/download/iphone\" rel=\"nofollow\">Twitter for iPhone</a>",
+            "truncated": false,
+            "in_reply_to_status_id": 300313157778407400,
+            "in_reply_to_status_id_str": "300313157778407425",
+            "in_reply_to_user_id": 514576527,
+            "in_reply_to_user_id_str": "514576527",
+            "in_reply_to_screen_name": "nzepko69me",
+            "user": {
+                "id": 184229223,
+                "id_str": "184229223",
+                "name": "Dr. Flat ",
+                "screen_name": "Bijon_Brydson2",
+                "location": "Instagram: Bijonnn",
+                "description": "6ft Point Guard. #WVU2016 F.O.E Doing What They Said I Couldn't. Follow me and Join my Journey http://t.co/X7g39QCc",
+                "url": "http://twitter.com/Bucketsss24",
+                "entities": {
+                    "url": {
+                        "urls": [
+                            {
+                                "url": "http://twitter.com/Bucketsss24",
+                                "expanded_url": null,
+                                "indices": [
+                                    0,
+                                    30
+                                ]
+                            }
+                        ]
+                    },
+                    "description": {
+                        "urls": [
+                            {
+                                "url": "http://t.co/X7g39QCc",
+                                "expanded_url": "http://youtu.be/dOdgNOvEdm8",
+                                "display_url": "youtu.be/dOdgNOvEdm8",
+                                "indices": [
+                                    95,
+                                    115
+                                ]
+                            }
+                        ]
+                    }
+                },
+                "protected": false,
+                "followers_count": 1574,
+                "friends_count": 422,
+                "listed_count": 2,
+                "created_at": "Sun Aug 29 01:13:41 +0000 2010",
+                "favourites_count": 2446,
+                "utc_offset": -18000,
+                "time_zone": "Quito",
+                "geo_enabled": false,
+                "verified": false,
+                "statuses_count": 29029,
+                "lang": "en",
+                "contributors_enabled": false,
+                "is_translator": false,
+                "profile_background_color": "131516",
+                "profile_background_image_url": "http://a0.twimg.com/profile_background_images/434347433/TEAM.jpg",
+                "profile_background_image_url_https": "https://si0.twimg.com/profile_background_images/434347433/TEAM.jpg",
+                "profile_background_tile": false,
+                "profile_image_url": "http://a0.twimg.com/profile_images/3222648808/e4c97f7f286f6aa0ec0b59a1efab4084_normal.jpeg",
+                "profile_image_url_https": "https://si0.twimg.com/profile_images/3222648808/e4c97f7f286f6aa0ec0b59a1efab4084_normal.jpeg",
+                "profile_link_color": "009999",
+                "profile_sidebar_border_color": "EEEEEE",
+                "profile_sidebar_fill_color": "EFEFEF",
+                "profile_text_color": "333333",
+                "profile_use_background_image": true,
+                "default_profile": false,
+                "default_profile_image": false,
+                "following": null,
+                "follow_request_sent": null,
+                "notifications": null
+            },
+            "geo": null,
+            "coordinates": null,
+            "place": null,
+            "contributors": null,
+            "retweet_count": 0,
+            "entities": {
+                "hashtags": [],
+                "urls": [],
+                "user_mentions": [
+                    {
+                        "screen_name": "nzepko69me",
+                        "name": "nick zepko",
+                        "id": 514576527,
+                        "id_str": "514576527",
+                        "indices": [
+                            0,
+                            11
+                        ]
+                    }
+                ]
+            },
+            "favorited": false,
+            "retweeted": false
+        },
+        {
+            "metadata": {
+                "result_type": "recent",
+                "iso_language_code": "en"
+            },
+            "created_at": "Sat Feb 09 18:50:58 +0000 2013",
+            "id": 300315875469307900,
+            "id_str": "300315875469307905",
+            "text": "For BTC 3.00:  Reddit Upvote Bot Coded in Python  http://t.co/BqODVOJh #bitcoin",
+            "source": "<a href=\"http://www.bitcoinclassifieds.net\" rel=\"nofollow\">Bitcoin Classifieds</a>",
+            "truncated": false,
+            "in_reply_to_status_id": null,
+            "in_reply_to_status_id_str": null,
+            "in_reply_to_user_id": null,
+            "in_reply_to_user_id_str": null,
+            "in_reply_to_screen_name": null,
+            "user": {
+                "id": 288709194,
+                "id_str": "288709194",
+                "name": "Bitcoin Classifieds",
+                "screen_name": "BTCClassifieds",
+                "location": "Edinburgh",
+                "description": "Follow me to get updates when Bitcoin Classifieds are posted on the biggest Bitcoin advertising site on the web.",
+                "url": "http://www.bitcoinclassifieds.net",
+                "entities": {
+                    "url": {
+                        "urls": [
+                            {
+                                "url": "http://www.bitcoinclassifieds.net",
+                                "expanded_url": null,
+                                "indices": [
+                                    0,
+                                    33
+                                ]
+                            }
+                        ]
+                    },
+                    "description": {
+                        "urls": []
+                    }
+                },
+                "protected": false,
+                "followers_count": 975,
+                "friends_count": 1268,
+                "listed_count": 33,
+                "created_at": "Wed Apr 27 10:02:34 +0000 2011",
+                "favourites_count": 0,
+                "utc_offset": -10800,
+                "time_zone": "Greenland",
+                "geo_enabled": false,
+                "verified": false,
+                "statuses_count": 1294,
+                "lang": "en",
+                "contributors_enabled": false,
+                "is_translator": false,
+                "profile_background_color": "FFFFFF",
+                "profile_background_image_url": "http://a0.twimg.com/profile_background_images/329340559/coinstwitter.png",
+                "profile_background_image_url_https": "https://si0.twimg.com/profile_background_images/329340559/coinstwitter.png",
+                "profile_background_tile": false,
+                "profile_image_url": "http://a0.twimg.com/profile_images/2542114668/2k35qa5o0dt2ucndxcqp_normal.png",
+                "profile_image_url_https": "https://si0.twimg.com/profile_images/2542114668/2k35qa5o0dt2ucndxcqp_normal.png",
+                "profile_link_color": "0064BA",
+                "profile_sidebar_border_color": "C0DEED",
+                "profile_sidebar_fill_color": "DDEEF6",
+                "profile_text_color": "333333",
+                "profile_use_background_image": false,
+                "default_profile": false,
+                "default_profile_image": false,
+                "following": null,
+                "follow_request_sent": null,
+                "notifications": null
+            },
+            "geo": null,
+            "coordinates": null,
+            "place": null,
+            "contributors": null,
+            "retweet_count": 0,
+            "entities": {
+                "hashtags": [
+                    {
+                        "text": "bitcoin",
+                        "indices": [
+                            71,
+                            79
+                        ]
+                    }
+                ],
+                "urls": [
+                    {
+                        "url": "http://t.co/BqODVOJh",
+                        "expanded_url": "http://www.bitcoinclassifieds.net/ad/3441/",
+                        "display_url": "bitcoinclassifieds.net/ad/3441/",
+                        "indices": [
+                            50,
+                            70
+                        ]
+                    }
+                ],
+                "user_mentions": []
+            },
+            "favorited": false,
+            "retweeted": false,
+            "possibly_sensitive": false
+        },
+        {
+            "metadata": {
+                "result_type": "recent",
+                "iso_language_code": "en"
+            },
+            "created_at": "Sat Feb 09 18:19:56 +0000 2013",
+            "id": 300308061753597950,
+            "id_str": "300308061753597953",
+            "text": "@zzzeek This is great news for trying to get SCons to run on Python 3. Much appreciated news. 2.4 current floor. Lots of hacks for 2.2isms.",
+            "source": "<a href=\"http://www.hootsuite.com\" rel=\"nofollow\">HootSuite</a>",
+            "truncated": false,
+            "in_reply_to_status_id": 300307347824316400,
+            "in_reply_to_status_id_str": "300307347824316416",
+            "in_reply_to_user_id": 15088129,
+            "in_reply_to_user_id_str": "15088129",
+            "in_reply_to_screen_name": "zzzeek",
+            "user": {
+                "id": 238541848,
+                "id_str": "238541848",
+                "name": "Russel Winder",
+                "screen_name": "russel_winder",
+                "location": "London",
+                "description": "Independent consultant, analyst, author, trainer, expert witness -- programming, software development, build and version control.",
+                "url": "http://www.russel.org.uk",
+                "entities": {
+                    "url": {
+                        "urls": [
+                            {
+                                "url": "http://www.russel.org.uk",
+                                "expanded_url": null,
+                                "indices": [
+                                    0,
+                                    24
+                                ]
+                            }
+                        ]
+                    },
+                    "description": {
+                        "urls": []
+                    }
+                },
+                "protected": false,
+                "followers_count": 556,
+                "friends_count": 229,
+                "listed_count": 31,
+                "created_at": "Sat Jan 15 12:14:57 +0000 2011",
+                "favourites_count": 6,
+                "utc_offset": 0,
+                "time_zone": "London",
+                "geo_enabled": false,
+                "verified": false,
+                "statuses_count": 5737,
+                "lang": "en",
+                "contributors_enabled": false,
+                "is_translator": false,
+                "profile_background_color": "542F15",
+                "profile_background_image_url": "http://a0.twimg.com/profile_background_images/642266253/52hfu11dsjvkdwcziir1.jpeg",
+                "profile_background_image_url_https": "https://si0.twimg.com/profile_background_images/642266253/52hfu11dsjvkdwcziir1.jpeg",
+                "profile_background_tile": false,
+                "profile_image_url": "http://a0.twimg.com/profile_images/1216266877/2006-05-01_500x444_300dpi_q95_normal.jpg",
+                "profile_image_url_https": "https://si0.twimg.com/profile_images/1216266877/2006-05-01_500x444_300dpi_q95_normal.jpg",
+                "profile_link_color": "EB8346",
+                "profile_sidebar_border_color": "D9B17E",
+                "profile_sidebar_fill_color": "EADEAA",
+                "profile_text_color": "333333",
+                "profile_use_background_image": true,
+                "default_profile": false,
+                "default_profile_image": false,
+                "following": null,
+                "follow_request_sent": null,
+                "notifications": null
+            },
+            "geo": null,
+            "coordinates": null,
+            "place": null,
+            "contributors": null,
+            "retweet_count": 0,
+            "entities": {
+                "hashtags": [],
+                "urls": [],
+                "user_mentions": [
+                    {
+                        "screen_name": "zzzeek",
+                        "name": "mike bayer",
+                        "id": 15088129,
+                        "id_str": "15088129",
+                        "indices": [
+                            0,
+                            7
+                        ]
+                    }
+                ]
+            },
+            "favorited": false,
+            "retweeted": false
+        },
+        {
+            "metadata": {
+                "result_type": "recent",
+                "iso_language_code": "en"
+            },
+            "created_at": "Sat Feb 09 18:14:20 +0000 2013",
+            "id": 300306654623322100,
+            "id_str": "300306654623322112",
+            "text": "RT @Clarisonic: We love the Pretty in Python set! We’ll be picking 3 participants to win a Candy Apple Red #Aria in honor of Valentine’s ...",
+            "source": "web",
+            "truncated": false,
+            "in_reply_to_status_id": null,
+            "in_reply_to_status_id_str": null,
+            "in_reply_to_user_id": null,
+            "in_reply_to_user_id_str": null,
+            "in_reply_to_screen_name": null,
+            "user": {
+                "id": 1154966000,
+                "id_str": "1154966000",
+                "name": "allyson r baxter",
+                "screen_name": "allysonrbaxter3",
+                "location": "",
+                "description": "",
+                "url": null,
+                "entities": {
+                    "description": {
+                        "urls": []
+                    }
+                },
+                "protected": false,
+                "followers_count": 7,
+                "friends_count": 180,
+                "listed_count": 0,
+                "created_at": "Wed Feb 06 20:09:04 +0000 2013",
+                "favourites_count": 174,
+                "utc_offset": null,
+                "time_zone": null,
+                "geo_enabled": false,
+                "verified": false,
+                "statuses_count": 77,
+                "lang": "en",
+                "contributors_enabled": false,
+                "is_translator": false,
+                "profile_background_color": "C0DEED",
+                "profile_background_image_url": "http://a0.twimg.com/images/themes/theme1/bg.png",
+                "profile_background_image_url_https": "https://si0.twimg.com/images/themes/theme1/bg.png",
+                "profile_background_tile": false,
+                "profile_image_url": "http://a0.twimg.com/sticky/default_profile_images/default_profile_6_normal.png",
+                "profile_image_url_https": "https://si0.twimg.com/sticky/default_profile_images/default_profile_6_normal.png",
+                "profile_link_color": "0084B4",
+                "profile_sidebar_border_color": "C0DEED",
+                "profile_sidebar_fill_color": "DDEEF6",
+                "profile_text_color": "333333",
+                "profile_use_background_image": true,
+                "default_profile": true,
+                "default_profile_image": true,
+                "following": null,
+                "follow_request_sent": null,
+                "notifications": null
+            },
+            "geo": null,
+            "coordinates": null,
+            "place": null,
+            "contributors": null,
+            "retweeted_status": {
+                "metadata": {
+                    "result_type": "recent",
+                    "iso_language_code": "en"
+                },
+                "created_at": "Tue Feb 05 19:29:35 +0000 2013",
+                "id": 298876040154054660,
+                "id_str": "298876040154054658",
+                "text": "We love the Pretty in Python set! We’ll be picking 3 participants to win a Candy Apple Red #Aria in honor of Valentine’s Day! #SonicChat",
+                "source": "<a href=\"http://tweetchat.com/\" rel=\"nofollow\">TweetChat</a>",
+                "truncated": false,
+                "in_reply_to_status_id": null,
+                "in_reply_to_status_id_str": null,
+                "in_reply_to_user_id": null,
+                "in_reply_to_user_id_str": null,
+                "in_reply_to_screen_name": null,
+                "user": {
+                    "id": 17052952,
+                    "id_str": "17052952",
+                    "name": "Clarisonic",
+                    "screen_name": "Clarisonic",
+                    "location": "TRANSFORM YOUR SKIN",
+                    "description": "",
+                    "url": "http://www.clarisonic.com",
+                    "entities": {
+                        "url": {
+                            "urls": [
+                                {
+                                    "url": "http://www.clarisonic.com",
+                                    "expanded_url": null,
+                                    "indices": [
+                                        0,
+                                        25
+                                    ]
+                                }
+                            ]
+                        },
+                        "description": {
+                            "urls": []
+                        }
+                    },
+                    "protected": false,
+                    "followers_count": 23036,
+                    "friends_count": 12314,
+                    "listed_count": 565,
+                    "created_at": "Wed Oct 29 21:46:40 +0000 2008",
+                    "favourites_count": 5,
+                    "utc_offset": -28800,
+                    "time_zone": "Pacific Time (US & Canada)",
+                    "geo_enabled": false,
+                    "verified": false,
+                    "statuses_count": 24577,
+                    "lang": "en",
+                    "contributors_enabled": false,
+                    "is_translator": false,
+                    "profile_background_color": "FFFFFF",
+                    "profile_background_image_url": "http://a0.twimg.com/profile_background_images/703669749/8814868295d1faaa3e297538c314a24d.jpeg",
+                    "profile_background_image_url_https": "https://si0.twimg.com/profile_background_images/703669749/8814868295d1faaa3e297538c314a24d.jpeg",
+                    "profile_background_tile": false,
+                    "profile_image_url": "http://a0.twimg.com/profile_images/3061100200/bdfb836d98cafb0f1d886eedebd72473_normal.jpeg",
+                    "profile_image_url_https": "https://si0.twimg.com/profile_images/3061100200/bdfb836d98cafb0f1d886eedebd72473_normal.jpeg",
+                    "profile_banner_url": "https://si0.twimg.com/profile_banners/17052952/1357245262",
+                    "profile_link_color": "EF8603",
+                    "profile_sidebar_border_color": "FFFFFF",
+                    "profile_sidebar_fill_color": "EDFAFA",
+                    "profile_text_color": "737373",
+                    "profile_use_background_image": true,
+                    "default_profile": false,
+                    "default_profile_image": false,
+                    "following": null,
+                    "follow_request_sent": null,
+                    "notifications": null
+                },
+                "geo": null,
+                "coordinates": null,
+                "place": null,
+                "contributors": null,
+                "retweet_count": 14,
+                "entities": {
+                    "hashtags": [
+                        {
+                            "text": "Aria",
+                            "indices": [
+                                91,
+                                96
+                            ]
+                        },
+                        {
+                            "text": "SonicChat",
+                            "indices": [
+                                126,
+                                136
+                            ]
+                        }
+                    ],
+                    "urls": [],
+                    "user_mentions": []
+                },
+                "favorited": false,
+                "retweeted": false
+            },
+            "retweet_count": 14,
+            "entities": {
+                "hashtags": [
+                    {
+                        "text": "Aria",
+                        "indices": [
+                            107,
+                            112
+                        ]
+                    }
+                ],
+                "urls": [],
+                "user_mentions": [
+                    {
+                        "screen_name": "Clarisonic",
+                        "name": "Clarisonic",
+                        "id": 17052952,
+                        "id_str": "17052952",
+                        "indices": [
+                            3,
+                            14
+                        ]
+                    }
+                ]
+            },
+            "favorited": false,
+            "retweeted": false
+        }
+    ],
+    "search_metadata": {
+        "completed_in": 0.042,
+        "max_id": 300347289904488450,
+        "max_id_str": "300347289904488452",
+        "next_results": "?max_id=300306654623322111&q=python%203&include_entities=1",
+        "query": "python+3",
+        "refresh_url": "?since_id=300347289904488452&q=python%203&include_entities=1",
+        "count": 15,
+        "since_id": 0,
+        "since_id_str": "0"
+    }
+}
