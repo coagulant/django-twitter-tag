@@ -124,7 +124,7 @@ class SearchTag(BaseTwitterTag):
         return params
 
     def get_json(self, twitter, **kwargs):
-        return twitter.search.tweets(**kwargs)
+        return twitter.search.tweets(**kwargs)['statuses']
 
 
 register.tag(UserTag)
