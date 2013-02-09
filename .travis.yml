@@ -8,7 +8,7 @@ env:
   - DJANGO=1.5b2
 install:
   - pip install -q https://github.com/django/django/archive/${DJANGO}.zip#egg=django
-  - python setup.py -q install --use-mirrors
+  - python setup.py -q install
 script: python setup.py test
 branches:
   only:
