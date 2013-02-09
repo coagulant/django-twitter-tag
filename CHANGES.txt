@@ -1,5 +1,5 @@
-1.0.0
-=====
+1.0
+===
 * Twitter API 1.1 based on twitter library
 * Release in not BACKWARDS INCOMPATIBLE, oauth settings are now required
 * Added twitter search templatetag
@@ -8,8 +8,8 @@
 * Rewritten code + tests
 * Cache key is memcache-friendly
 
-0.4.0
-=====
+0.4
+===
 * Fixed tweet truncation for retweets
 * Added url expansion in tweets
 * Added tox and travis support
@@ -33,12 +33,12 @@
 =====
 * Fixed MANIFEST.in
 
-0.2.0
-=====
+0.2
+===
 * Renamed template tag library and template tag
 * Added documentation
 * Added twitter api exception handling
 
-0.1.0
-=====
+0.1
+===
 * Initial release
