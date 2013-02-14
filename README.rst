@@ -4,6 +4,9 @@ Django Twitter Tag
 .. image:: https://secure.travis-ci.org/coagulant/django-twitter-tag.png?branch=dev
     :target: https://travis-ci.org/coagulant/django-twitter-tag
 
+.. image:: https://coveralls.io/repos/coagulant/django-twitter-tag/badge.png?branch=dev
+    :target: https://coveralls.io/r/coagulant/django-twitter-tag/
+
 A django template tag to display user's recent tweets / search results.
 Version 1.0 uses Twitter API 1.1.
 

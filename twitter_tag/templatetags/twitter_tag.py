@@ -20,13 +20,13 @@ class BaseTwitterTag(Tag):
     """ Abstract twitter tag"""
 
     def get_cache_key(self, args_disct):
-        raise NotImplemented
+        raise NotImplementedError
 
     def get_json(self, twitter):
-        raise NotImplemented
+        raise NotImplementedError
 
     def get_api_call_params(self, **kwargs):
-        raise NotImplemented
+        raise NotImplementedError
 
     def enrich(self, tweet, max_url_length):
         """ Apply the local presentation logic to the fetched data."""
@@ -130,5 +130,3 @@ class SearchTag(BaseTwitterTag):
 
 register.tag(UserTag)
 register.tag(SearchTag)
-
-

@@ -11,6 +11,7 @@ tests_require = [
     'mock>=0.7.2',
     'httpretty',
     'sure',
+    'coveralls',
 ]
 
 setup(

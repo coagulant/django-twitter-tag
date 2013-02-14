@@ -9,7 +9,10 @@ env:
 install:
   - pip install -q https://github.com/django/django/archive/${DJANGO}.zip#egg=django
   - python setup.py -q install
-script: python setup.py test
+script:
+  - coverage run --source=twitter_tag setup.py -q test
 branches:
   only:
     - dev
+after_script:
+  - coveralls --verbose
