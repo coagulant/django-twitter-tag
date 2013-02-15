@@ -8,9 +8,10 @@ env:
   - DJANGO=1.5b2
 install:
   - pip install -q https://github.com/django/django/archive/${DJANGO}.zip#egg=django
-  - python setup.py -q install
+  - pip install coveralls
+  - python setup.py install
 script:
-  - coverage run --source=twitter_tag setup.py -q test
+  - coverage run --source=twitter_tag setup.py test
 branches:
   only:
     - dev
