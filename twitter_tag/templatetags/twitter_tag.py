@@ -12,6 +12,7 @@ from classytags.arguments import Argument, MultiKeywordArgument
 
 from ..utils import expand_tweet_urls, urlize_twitter_text, get_user_cache_key, get_search_cache_key
 
+from urllib2 import URLError
 
 register = template.Library()
 
@@ -46,7 +47,7 @@ class BaseTwitterTag(Tag):
                                          settings.TWITTER_CONSUMER_KEY,
                                          settings.TWITTER_CONSUMER_SECRET))
             json = self.get_json(twitter, **self.get_api_call_params(**kwargs))
-        except TwitterError as e:
+        except (TwitterError, URLError, ValueError) as e:
             logging.getLogger(__name__).error(str(e))
             context[kwargs['asvar']] = cache.get(cache_key, [])
             return ''
