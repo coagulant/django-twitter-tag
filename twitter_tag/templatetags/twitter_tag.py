@@ -121,7 +121,7 @@ class SearchTag(BaseTwitterTag):
         return get_search_cache_key(*kwargs_dict.values())
 
     def get_api_call_params(self, **kwargs):
-        params = {'q': kwargs['q']}
+        params = {'q': kwargs['q'].encode("utf-8")}
         params.update(kwargs['options'])
         return params
 

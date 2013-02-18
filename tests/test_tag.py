@@ -206,6 +206,14 @@ class SearchTag(TwitterTag):
             length=15
         )
 
+    def test_unicode_query(self):
+        self.check_render(
+            template="""{% search_tweets for "питон" as tweets %}""",
+            json_mock='python3.json',
+            expected_kwargs={'q': ['питон'.encode('utf-8')]},
+            length=15
+        )
+
 
 def render_template(template):
     context = Context()
