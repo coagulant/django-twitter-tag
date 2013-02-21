@@ -10,9 +10,12 @@ from twitter import Twitter, OAuth, TwitterError
 from classytags.core import Tag, Options
 from classytags.arguments import Argument, MultiKeywordArgument
 
-from ..utils import expand_tweet_urls, urlize_twitter_text, get_user_cache_key, get_search_cache_key
+from ..utils import *
 
-from urllib2 import URLError
+try:
+    from urllib2 import URLError
+except ImportError:
+    from urllib.error import URLError
 
 register = template.Library()
 
@@ -29,17 +32,15 @@ class BaseTwitterTag(Tag):
     def get_api_call_params(self, **kwargs):
         raise NotImplementedError
 
-    def enrich(self, tweet, max_url_length):
+    def enrich(self, tweet):
         """ Apply the local presentation logic to the fetched data."""
-        text = expand_tweet_urls(tweet, max_url_length)
-        tweet['html'] = urlize_twitter_text(text, max_url_length)
+        tweet = urlize_tweet(expand_tweet_urls(tweet))
         # parses created_at "Wed Aug 27 13:08:45 +0000 2008"
         tweet['datetime'] = datetime.strptime(tweet['created_at'], '%a %b %d %H:%M:%S +0000 %Y')
         return tweet
 
     def render_tag(self, context, **kwargs):
         cache_key = self.get_cache_key(kwargs)
-        max_url_length = 60 if kwargs['max_url_length'] is None else kwargs['max_url_length']
 
         try:
             twitter = Twitter(auth=OAuth(settings.TWITTER_OAUTH_TOKEN,
@@ -47,12 +48,12 @@ class BaseTwitterTag(Tag):
                                          settings.TWITTER_CONSUMER_KEY,
                                          settings.TWITTER_CONSUMER_SECRET))
             json = self.get_json(twitter, **self.get_api_call_params(**kwargs))
-        except (TwitterError, URLError, ValueError) as e:
+        except (TwitterError, URLError) as e:
             logging.getLogger(__name__).error(str(e))
             context[kwargs['asvar']] = cache.get(cache_key, [])
             return ''
 
-        json = [self.enrich(tweet, max_url_length) for tweet in json]
+        json = [self.enrich(tweet) for tweet in json]
 
         if kwargs['limit']:
             json = json[:kwargs['limit']]
@@ -69,7 +70,6 @@ class UserTag(BaseTwitterTag):
         :type username: string
         :type asvar: string
         :type exclude: string
-        :type max_url_length: string
         :type limit: string
 
         NB: count argument of twitter API is not useful, so we slice it ourselves
@@ -79,20 +79,18 @@ class UserTag(BaseTwitterTag):
         Examples:
         {% get_tweets for "futurecolors" as tweets exclude "replies" limit 10 %}
         {% get_tweets for "futurecolors" as tweets exclude "retweets" %}
-        {% get_tweets for "futurecolors" as tweets max_url_length 0 %}
-        {% get_tweets for "futurecolors" as tweets exclude "retweets,replies" max_url_length 20 limit 1 %}
+        {% get_tweets for "futurecolors" as tweets exclude "retweets,replies" limit 1 %}
     """
     name = 'get_tweets'
     options = Options(
         'for', Argument('username'),
         'as', Argument('asvar', resolve=False),
         'exclude', Argument('exclude', required=False),
-        'max_url_length', Argument('max_url_length', required=False),
         'limit', Argument('limit', required=False),
     )
 
     def get_cache_key(self, kwargs_dict):
-        return get_user_cache_key(*kwargs_dict.values())
+        return get_user_cache_key(**kwargs_dict)
 
     def get_api_call_params(self, **kwargs):
         params = {'screen_name': kwargs['username']}
@@ -113,15 +111,14 @@ class SearchTag(BaseTwitterTag):
         'for', Argument('q'),
         'as', Argument('asvar', resolve=False),
         MultiKeywordArgument('options', required=False),
-        'max_url_length', Argument('max_url_length', required=False),
         'limit', Argument('limit', required=False),
     )
 
     def get_cache_key(self, kwargs_dict):
-        return get_search_cache_key(*kwargs_dict.values())
+        return get_search_cache_key(kwargs_dict)
 
     def get_api_call_params(self, **kwargs):
-        params = {'q': kwargs['q'].encode("utf-8")}
+        params = {'q': kwargs['q'].encode('utf-8')}
         params.update(kwargs['options'])
         return params
 
