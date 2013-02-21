@@ -18,6 +18,8 @@ script:
   - coverage run --source=twitter_tag setup.py test
 exclude:
   - python: 3.3
+    env: DJANGO=1.3.5
+  - python: 3.3
     env: DJANGO=1.4.3
 branches:
   only:

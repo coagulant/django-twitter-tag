@@ -5,7 +5,7 @@ import mock
 from django.conf import settings
 from nose.plugins.attrib import attr
 from nose.tools import nottest
-from tests.utils import render_template
+from .utils import render_template
 
 
 @nottest
