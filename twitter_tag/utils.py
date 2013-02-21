@@ -1,13 +1,16 @@
 from __future__ import unicode_literals
 import re
-import ttp
+try:
+    from urllib import quote
+except ImportError:
+    from urllib.parse import quote
 
 
-def get_user_cache_key(*args):
+def get_user_cache_key(**kwargs):
     """ Generate suitable key to cache twitter tag context
     """
-    key = 'get_tweets_%s' % ('_'.join([str(arg) for arg in args if arg]))
-    not_allowed = re.compile('[^%s]' % ''.join([chr(i) for i in xrange(33, 128)]))
+    key = 'get_tweets_%s' % ('_'.join([str(kwargs[key]) for key in sorted(kwargs) if kwargs[key]]))
+    not_allowed = re.compile('[^%s]' % ''.join([chr(i) for i in range(33, 128)]))
     key = not_allowed.sub('', key)
     return key
 
@@ -16,31 +19,41 @@ def get_search_cache_key(prefix, *args):
     """ Generate suitable key to cache twitter tag context
     """
     key = '%s_%s' % (prefix, '_'.join([str(arg) for arg in args if arg]))
-    not_allowed = re.compile('[^%s]' % ''.join([chr(i) for i in xrange(33, 128)]))
+    not_allowed = re.compile('[^%s]' % ''.join([chr(i) for i in range(33, 128)]))
     key = not_allowed.sub('', key)
     return key
 
 
-def urlize_twitter_text(text, max_url_length=60):
+TWITTER_HASHTAG_URL = '<a href="https://twitter.com/search?q=#%s">%s</a>'
+TWITTER_USERNAME_URL = '<a href="https://twitter.com/%s">@%s</a>'
+
+
+def urlize_tweet(tweet):
     """ Turn #hashtag and @username in a text to Twitter hyperlinks,
         similar to the ``urlize()`` function in Django.
     """
-    tweet_parser = ttp.Parser(max_url_length=max_url_length)
-    return tweet_parser.parse(text).html
+    text = tweet.get('html', tweet['text'])
+    for hash in tweet['entities']['hashtags']:
+        text = text.replace('#%s' % hash['text'], TWITTER_HASHTAG_URL % (quote(hash['text']), hash['text']))
+    for mention in tweet['entities']['user_mentions']:
+        text = text.replace('@%s' % mention['screen_name'], TWITTER_USERNAME_URL % (quote(mention['screen_name']), mention['screen_name']))
+    tweet['html'] = text
+    return tweet
 
 
-def expand_tweet_urls(status, max_url_length=60):
-    """ Replace shortened URLs with long URLs in the twitter status, and add the "RT" flag. """
-    if 'retweeted_status' in status:
-        text = 'RT @{user}: {text}'.format(user=status['retweeted_status']['user']['screen_name'],
-                                           text=status['retweeted_status']['text'])
-        urls = status['retweeted_status']['entities']['urls']
+def expand_tweet_urls(tweet):
+    """ Replace shortened URLs with long URLs in the twitter status, and add the "RT" flag.
+        Should be used before urlize_tweet
+    """
+    if 'retweeted_status' in tweet:
+        text = 'RT @{user}: {text}'.format(user=tweet['retweeted_status']['user']['screen_name'],
+                                           text=tweet['retweeted_status']['text'])
+        urls = tweet['retweeted_status']['entities']['urls']
     else:
-        text = status['text']
-        urls = status['entities']['urls']
+        text = tweet['text']
+        urls = tweet['entities']['urls']
 
-    if max_url_length:
-        for status_url in urls:
-            text = text.replace(status_url['url'], status_url['expanded_url'])
-
-    return text
+    for url in urls:
+        text = text.replace(url['url'], '<a href="%s">%s</a>' % (url['expanded_url'], url['display_url']))
+    tweet['html'] = text
+    return tweet
