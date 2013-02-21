@@ -1,17 +1,18 @@
 # coding: utf-8
 from __future__ import unicode_literals
 import json
-import os
 import unittest
 import warnings
 import datetime
 
 from mock import patch
+from nose.tools import nottest
 from sure import expect
 from django.conf import settings
 from django.core.cache import cache
-from django.template import Context, Template, TemplateSyntaxError
+from django.template import Template, TemplateSyntaxError
 from httpretty import httprettified, HTTPretty
+from tests.utils import render_template, clear_query_dict, get_json
 
 from twitter_tag.utils import get_user_cache_key
 
@@ -27,7 +28,7 @@ class TwitterTag(unittest.TestCase):
         expect(output).should.be.empty
         expect(clear_query_dict(HTTPretty.last_request.querystring)).should.equal(expected_kwargs)
         if length is None:
-            length = len(json.loads(get_json(json_mock)))
+            length = len(json.loads(get_json(json_mock).decode('utf8')))
         expect(context[asvar]).should.have.length_of(length)
         return context
 
@@ -93,8 +94,8 @@ class UsernameTag(TwitterTag):
         expect(context['more_tweets']).should.have.length_of(3)
 
     def test_bad_syntax(self):
-        self.assertRaises(TemplateSyntaxError, Template, """{% get_tweets %}""")
-        self.assertRaises(TemplateSyntaxError, Template, """{% get_tweets as "tweets" %}""")
+        Template.when.called_with("""{% get_tweets %}""").should.throw(TemplateSyntaxError)
+        Template.when.called_with("""{% get_tweets as "tweets" %}""").should.throw(TemplateSyntaxError)
 
     @patch('logging.getLogger')
     @httprettified
@@ -120,7 +121,7 @@ class UsernameTag(TwitterTag):
 
         # it should be ok by now
         output, context = render_template("""{% get_tweets for "jresig" as tweets %}""")
-        cache_key = get_user_cache_key('jresig', 'tweets')
+        cache_key = get_user_cache_key(asvar='tweets', username='jresig')
         expect(cache.get(cache_key)).should.have.length_of(1)
         expect(context['tweets'][0]['text']).to.equal("This is not John Resig - you should be following @jeresig instead!!!")
 
@@ -133,13 +134,13 @@ class UsernameTag(TwitterTag):
 
     @httprettified
     def test_cache_key_portable(self):
-        with warnings.catch_warnings(record=True) as w:
+        with warnings.catch_warnings(record=True) as caught_warnings:
             warnings.simplefilter("always")
             output, context = self.render(
                 template="""{% get_tweets for "jresig" as tweets exclude 'replies, retweets' %}""",
                 json_mocks=['jeresig.json'],
             )
-            assert len(w) == 0
+            assert len(caught_warnings) == 0
 
     @httprettified
     def test_datetime(self):
@@ -148,15 +149,15 @@ class UsernameTag(TwitterTag):
             json_mocks='jeresig.json',
         )
         # Fri Mar 21 19:42:21 +0000 2008
-        self.assertEquals(context['tweets'][0]['datetime'], datetime.datetime(2008, 3, 21, 19, 42, 21))
+        (context['tweets'][0]['datetime']).should.be.equal(datetime.datetime(2008, 3, 21, 19, 42, 21))
 
     @httprettified
-    def test_html(self):
+    def test_html_mentions(self):
         output, context = self.render(
             template="""{% get_tweets for "jresig" as tweets %}""",
             json_mocks='jeresig.json',
         )
-        self.assertEquals(context['tweets'][0]['html'], """This is not John Resig - you should be following <a href=\"http://twitter.com/jeresig\">@jeresig</a> instead!!!""")
+        (context['tweets'][0]['html']).should.be.equal("""This is not John Resig - you should be following <a href=\"https://twitter.com/jeresig\">@jeresig</a> instead!!!""")
 
     @httprettified
     def test_expand_urlize(self):
@@ -166,19 +167,9 @@ class UsernameTag(TwitterTag):
         )
         tweet = context['tweets'][0]
 
-        self.assertTrue(tweet['text'].endswith('...'))  # original response is trimmed by api...
-        self.assertFalse(tweet['html'].endswith('...'))  # but not ours html ;)
-        self.assertTrue(tweet['html'].startswith('RT <a href="http://twitter.com/travisci">@travisci</a>: '))
-
-    @httprettified
-    def test_url_is_not_expanded(self):
-        output, context = self.render(
-            template="""{% get_tweets for "futurecolors" as tweets max_url_length 0 %}""",
-            json_mocks='futurecolors.json',
-        )
-        tweet = context['tweets'][0]
-        expect(tweet['html']).to.contain('http://t.co/aVQRnBKP')
-        expect(tweet['html']).to.contain('http://t.co/7KgHV8iI')
+        expect(tweet['text'].endswith('...')).should.be.true  # original response is trimmed by api...
+        expect(tweet['html'].endswith('...')).should.be.false  # but not ours html ;)
+        expect(tweet['html'].startswith('RT <a href="https://twitter.com/travisci">@travisci</a>: ')).should.be.true
 
 
 def test_settings():
@@ -206,34 +197,22 @@ class SearchTag(TwitterTag):
             length=15
         )
 
+    @httprettified
+    def test_html_hashtags(self):
+        output, context = self.render(
+            template="""{% search_tweets for "python 3" as tweets %}""",
+            json_mocks='python3.json',
+        )
+        tweet_html = context['tweets'][0]['html']
+        expect(tweet_html).should.contain('<a href="https://twitter.com/search?q=#python">')
+        expect(tweet_html).should.contain('<a href="https://twitter.com/search?q=#CouchDB">')
+
+    @nottest # https://github.com/gabrielfalcao/HTTPretty/issues/36')
+    @httprettified
     def test_unicode_query(self):
         self.check_render(
-            template="""{% search_tweets for "питон" as tweets %}""",
+            template=u"""{% search_tweets for "питон" as tweets %}""",
             json_mock='python3.json',
-            expected_kwargs={'q': ['питон'.encode('utf-8')]},
+            expected_kwargs={'q': ['питон']},
             length=15
         )
-
-
-def render_template(template):
-    context = Context()
-    template = Template('{% load twitter_tag %}'+template)
-    output = template.render(context)
-    return output, context
-
-
-def clear_query_dict(query):
-    oauth_keys = [
-        'oauth_consumer_key',
-        'oauth_nonce',
-        'oauth_signature',
-        'oauth_signature_method',
-        'oauth_timestamp',
-        'oauth_token',
-        'oauth_version'
-    ]
-    return dict((k, v) for k, v in query.iteritems() if k not in oauth_keys)
-
-
-def get_json(somefile):
-    return open(os.path.join('tests', 'json', somefile)).read()
