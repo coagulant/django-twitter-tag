@@ -1,3 +1,9 @@
+1.1
+===
+* Python 3 support
+* max_url_length argument is removed
+* better linkify for mentions and hashtags (ttp dependency removed)
+
 1.0
 ===
 * Twitter API 1.1 based on twitter library

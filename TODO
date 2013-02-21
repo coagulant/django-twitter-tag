@@ -1,11 +1,10 @@
 1.1
 ===
-utf8 search
 refactor get_search_cache_key
-python 3
 
 1.2
 ===
-functional tests
-remove max_url_length option
-Get rid of ttp: display_url in url replace
+twitter lib is masked as arg
+nose_setenv
+utf8 search tests
+functional tests and proper infrastructure

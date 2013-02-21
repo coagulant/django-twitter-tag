@@ -46,8 +46,7 @@ See how it looks like `on our site`_.
 Installation
 ------------
 
-This app works with python 2.6-2.7, Django 1.3-1.5b2.
-Python 3 support is planned in next releases.
+This app works with python 2.6, 2.7 and 3.3, Django 1.3-1.5b2.
 
 Recommended way to install is pip::
 
