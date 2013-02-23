@@ -2,26 +2,22 @@ language: python
 python:
   - 2.6
   - 2.7
-  - 3.3
 env:
   global:
     - DJANGO_SETTINGS_MODULE=twitter_tag.test_settings
   matrix:
     - DJANGO=1.3.5
     - DJANGO=1.4.3
-    - DJANGO=1.5c2
+matrix:
+  include:
+    - python: 3.3
+      env: DJANGO=1.3.5
 install:
   - pip install -q https://github.com/django/django/archive/${DJANGO}.zip#egg=django
   - pip install coveralls
   - python setup.py install
 script:
   - coverage run --source=twitter_tag setup.py test
-matrix:
-  exclude:
-    - python: 3.3
-      env: DJANGO=1.3.5
-    - python: 3.3
-      env: DJANGO=1.4.3
 branches:
   only:
     - dev
