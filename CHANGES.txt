@@ -3,6 +3,7 @@
 * Python 3 support
 * max_url_length argument is removed
 * better linkify for mentions and hashtags (ttp dependency removed)
+* better handling for not connecting or json decode errors
 
 1.0
 ===

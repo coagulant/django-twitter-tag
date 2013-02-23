@@ -186,4 +186,4 @@ Tests
 
 Run::
 
-    python setup.py test
+    DJANGO_SETTINGS_MODULE = twitter_tag.test_settings python setup.py test
