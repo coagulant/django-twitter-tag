@@ -13,3 +13,4 @@ pip-log.txt
 /test/reports/
 /reports/
 secret
+.coverage

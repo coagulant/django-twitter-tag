@@ -9,7 +9,7 @@ tests_require = [
     'nose==1.2.1',
     'mock>=0.7.2',
     'httpretty>=0.5.9',
-    'sure',
+    'sure>=1.1.7',
     'coveralls',
 ]
 
