@@ -1,5 +1,6 @@
 from __future__ import unicode_literals
 from datetime import datetime
+from six.moves import http_client
 import logging
 
 from django import template
@@ -48,7 +49,7 @@ class BaseTwitterTag(Tag):
                                          settings.TWITTER_CONSUMER_KEY,
                                          settings.TWITTER_CONSUMER_SECRET))
             json = self.get_json(twitter, **self.get_api_call_params(**kwargs))
-        except (TwitterError, URLError) as e:
+        except (TwitterError, URLError, ValueError, http_client.HTTPException) as e:
             logging.getLogger(__name__).error(str(e))
             context[kwargs['asvar']] = cache.get(cache_key, [])
             return ''
