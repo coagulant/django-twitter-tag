@@ -24,7 +24,7 @@ def get_search_cache_key(prefix, *args):
     return key
 
 
-TWITTER_HASHTAG_URL = '<a href="https://twitter.com/search?q=#%s">%s</a>'
+TWITTER_HASHTAG_URL = '<a href="https://twitter.com/search?q=#%s">#%s</a>'
 TWITTER_USERNAME_URL = '<a href="https://twitter.com/%s">@%s</a>'
 
 

@@ -204,8 +204,8 @@ class SearchTag(TwitterTag):
             json_mocks='python3.json',
         )
         tweet_html = context['tweets'][0]['html']
-        expect(tweet_html).should.contain('<a href="https://twitter.com/search?q=#python">')
-        expect(tweet_html).should.contain('<a href="https://twitter.com/search?q=#CouchDB">')
+        expect(tweet_html).should.contain('<a href="https://twitter.com/search?q=#python">#python')
+        expect(tweet_html).should.contain('<a href="https://twitter.com/search?q=#CouchDB">#CouchDB')
 
     @nottest # https://github.com/gabrielfalcao/HTTPretty/issues/36')
     @httprettified
