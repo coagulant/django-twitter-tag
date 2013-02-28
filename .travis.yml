@@ -11,7 +11,7 @@ env:
 matrix:
   include:
     - python: 3.3
-      env: DJANGO=1.5c2 DJANGO_SETTINGS_MODULE=twitter_tag.test_settings
+      env: DJANGO=1.5 DJANGO_SETTINGS_MODULE=twitter_tag.test_settings
 install:
   - pip install -q https://github.com/django/django/archive/${DJANGO}.zip#egg=django
   - pip install nose coveralls
