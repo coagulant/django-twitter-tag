@@ -7,9 +7,9 @@ read = lambda filepath: codecs.open(filepath, 'r', 'utf-8').read()
 tests_require = [
     'Django>=1.2',
     'nose==1.2.1',
-    'mock>=0.7.2',
-    'httpretty>=0.5.9',
-    'sure>=1.1.7',
+    'mock==1.0.1',
+    'httpretty==0.5.9',
+    'sure==1.1.7',
     'coveralls',
 ]
 
