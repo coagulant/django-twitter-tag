@@ -15,7 +15,7 @@ tests_require = [
 
 setup(
     name='django-twitter-tag',
-    version='1.1.1',
+    version='1.2',
     author='Ilya Baryshev',
     author_email='baryshev@gmail.com',
     packages=find_packages(exclude="tests"),

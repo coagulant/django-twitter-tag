@@ -1,3 +1,7 @@
+1.2
+===
+Fix for unicode tags.
+
 1.1.1
 =====
 * Proper HTTP Exception handling

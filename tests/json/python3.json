@@ -8,7 +8,7 @@
             "created_at": "Sat Feb 09 20:55:48 +0000 2013",
             "id": 300347289904488450,
             "id_str": "300347289904488452",
-            "text": "couchdbkit 0.6.4 is out, use latest http-parser and some fixes https://t.co/zJFgthaC Enjoy! #python #CouchDB",
+            "text": "couchdbkit 0.6.4 is out, use latest http-parser and some fixes https://t.co/zJFgthaC Enjoy! #python #КаучДБ",
             "source": "<a href=\"http://itunes.apple.com/us/app/twitter/id409789998?mt=12\" rel=\"nofollow\">Twitter for Mac</a>",
             "truncated": false,
             "in_reply_to_status_id": null,
@@ -87,7 +87,7 @@
                         ]
                     },
                     {
-                        "text": "CouchDB",
+                        "text": "КаучДБ",
                         "indices": [
                             100,
                             108
