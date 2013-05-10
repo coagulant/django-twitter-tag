@@ -14,7 +14,7 @@ Basic features are limiting numbers of displayed tweets, filtering out replies a
 Library exposes each tweet ``json`` in template, adding extra attributes: ``html`` and ``datetime``.
 First one makes urls, hashtags or twitter usernames clickable, juts like you expect them to be.
 Last one provides python datetime object to ease output in templates.
-Urs are expanded by default. Library handles twitter exceptions gracefully,
+Urls are expanded by default. Library handles twitter exceptions gracefully,
 returning last successful response.
 
 Usage
@@ -46,7 +46,7 @@ See how it looks like `on our site`_.
 Installation
 ------------
 
-This app works with python 2.6, 2.7 and 3.3, Django 1.3-1.5b2.
+This app works with python 2.6, 2.7 and 3.3, Django 1.3-1.5.
 
 Recommended way to install is pip::
 
@@ -150,7 +150,7 @@ Tweet's properties
 ~~~~~~~~~~~~~~~~~~
 
 get_tweets returns a list of tweets into context. Each tweets is a json dict, that has
-exactly the same attrubutes, as stated in API 1.1 docs, describing `tweet json`_.
+exactly the same attributes, as stated in API 1.1 docs, describing `tweet json`_.
 Tweet's created timestamp is converted to python object and is available in templates::
 
     {{ tweet.datetime|date:"D d M Y" }}
@@ -173,6 +173,12 @@ Any Twitter API exceptions like 'Over capacity' are silenced and logged.
 Django cache is used internally to store last successful response in case `twitter is down`_.
 
 .. _twitter is down: https://dev.twitter.com/docs/error-codes-responses
+
+Going beyond
+~~~~~~~~~~~~
+Since version 1.0 you can create your own template tags for specific twitter queries,
+not supported by this library. Simply inherit from ``twitter_tag.templatetags.twitter_tag.BaseTwitterTag``
+and implement your own ``get_json`` method (tag syntax is contolled by django-classy-tags).
 
 Development
 -----------
