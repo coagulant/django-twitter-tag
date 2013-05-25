@@ -14,7 +14,7 @@ matrix:
       env: DJANGO=1.5 DJANGO_SETTINGS_MODULE=twitter_tag.test_settings
 install:
   - pip install -q https://github.com/django/django/archive/${DJANGO}.zip#egg=django
-  - pip install nose coveralls
+  - pip install nose coveralls==dev
 script:
   - coverage run --source=twitter_tag setup.py nosetests
 branches:
