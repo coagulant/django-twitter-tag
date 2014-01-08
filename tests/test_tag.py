@@ -11,6 +11,7 @@ from sure import expect
 from django.conf import settings
 from django.core.cache import cache
 from django.template import Template, TemplateSyntaxError
+from django.utils import timezone
 from httpretty import httprettified, HTTPretty
 from tests.utils import render_template, clear_query_dict, get_json
 
@@ -149,7 +150,12 @@ class UsernameTag(TwitterTag):
             json_mocks='jeresig.json',
         )
         # Fri Mar 21 19:42:21 +0000 2008
-        (context['tweets'][0]['datetime']).should.be.equal(datetime.datetime(2008, 3, 21, 19, 42, 21))
+        if settings.USE_TZ:
+            # Get utc.
+            (context['tweets'][0]['datetime']).should.be.equal(datetime.datetime(2008, 3, 21, 19, 42, 21).replace(tzinfo=timezone.utc))
+        else:
+            (context['tweets'][0]['datetime']).should.be.equal(datetime.datetime(2008, 3, 21, 19, 42, 21))
+
 
     @httprettified
     def test_html_mentions(self):
