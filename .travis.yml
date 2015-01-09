@@ -1,6 +1,5 @@
 language: python
 python:
-  - 2.6
   - 2.7
 env:
   global:
@@ -15,12 +14,9 @@ matrix:
       env: DJANGO=1.5 DJANGO_SETTINGS_MODULE=twitter_tag.test_settings
     - python: 3.3
       env: DJANGO=1.6 DJANGO_SETTINGS_MODULE=twitter_tag.test_settings
-  exclude:
-    - python: 2.6
-      env: DJANGO=1.6 DJANGO_SETTINGS_MODULE=twitter_tag.test_settings
 install:
   - pip install -q https://github.com/django/django/archive/${DJANGO}.zip#egg=django
-  - pip install nose==1.2.1 coveralls==dev
+  - pip install nose==1.2.1 coveralls
 script:
   - coverage run --source=twitter_tag setup.py nosetests
 branches:

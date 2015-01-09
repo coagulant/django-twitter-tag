@@ -5,12 +5,10 @@ from setuptools import setup, find_packages
 read = lambda filepath: codecs.open(filepath, 'r', 'utf-8').read()
 
 tests_require = [
-    'Django>=1.2',
     'nose==1.2.1',
     'mock==1.0.1',
     'httpretty==0.5.9',
     'sure==1.1.7',
-    'coveralls',
 ]
 
 setup(
@@ -30,16 +28,15 @@ setup(
         'six==1.2.0',
     ],
     tests_require=tests_require,
-    test_suite = "nose.collector",
+    test_suite="nose.collector",
     extras_require={'test': tests_require},
-    classifiers = [
-        'Development Status :: 4 - Beta',
+    classifiers=[
+        'Development Status :: 5 - Production/Stable',
         'Framework :: Django',
         'Intended Audience :: Developers',
         'License :: OSI Approved :: MIT License',
         'Operating System :: OS Independent',
         'Programming Language :: Python',
-        'Programming Language :: Python :: 2.6',
         'Programming Language :: Python :: 2.7',
         'Programming Language :: Python :: 3.3',
     ],

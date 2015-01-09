@@ -38,15 +38,11 @@ Usage
     {% endfor %}
     </ul>
 
-See how it looks like `on our site`_.
-
-.. _on our site: http://futurecolors.ru/
-
 
 Installation
 ------------
 
-This app works with python 2.6, 2.7 and 3.3, Django 1.3-1.5.
+This app works with python 2.7 and 3.3, Django 1.4-1.6.
 
 Recommended way to install is pip::
 
